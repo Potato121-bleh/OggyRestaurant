@@ -4,6 +4,9 @@
  */
 package GUIpages;
 
+import backendHander.DBAppHandler;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ASUS
@@ -27,22 +30,34 @@ public class Add_New_Item extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtItemPrice = new javax.swing.JTextField();
-        txtItemName1 = new javax.swing.JTextField();
+        txt_price = new javax.swing.JTextField();
+        txt_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        additemback = new javax.swing.JButton();
-        additemback1 = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
+        btn_back = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        selectedFood = new javax.swing.JRadioButton();
+        selectedDrink = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        txt_price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_priceActionPerformed(evt);
+            }
+        });
+
+        txt_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nameActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setText("New Item");
@@ -50,13 +65,23 @@ public class Add_New_Item extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
         jLabel2.setText("Add new Item");
 
-        additemback.setBackground(new java.awt.Color(204, 204, 204));
-        additemback.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        additemback.setText("Back");
+        btn_save.setBackground(new java.awt.Color(204, 204, 204));
+        btn_save.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_save.setText("Save");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
 
-        additemback1.setBackground(new java.awt.Color(204, 204, 204));
-        additemback1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        additemback1.setText("Back");
+        btn_back.setBackground(new java.awt.Color(204, 204, 204));
+        btn_back.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Item Price:");
@@ -67,9 +92,19 @@ public class Add_New_Item extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("Item Price:");
 
-        jRadioButton1.setText("Dish");
+        selectedFood.setText("Food");
+        selectedFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedFoodActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Drink");
+        selectedDrink.setText("Drink");
+        selectedDrink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedDrinkActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Develop By |  DeveloperZin");
@@ -83,7 +118,7 @@ public class Add_New_Item extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(35, 35, 35)
-                            .addComponent(additemback1))
+                            .addComponent(btn_back))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(93, 93, 93)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -97,18 +132,18 @@ public class Add_New_Item extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtItemName1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(162, 162, 162))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
-                        .addComponent(jRadioButton1)
+                        .addComponent(selectedFood)
                         .addGap(50, 50, 50)
-                        .addComponent(jRadioButton2)
+                        .addComponent(selectedDrink)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(additemback, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
@@ -124,11 +159,11 @@ public class Add_New_Item extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(additemback1)
+                .addComponent(btn_back)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(102, 102, 102)
-                        .addComponent(txtItemName1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,15 +171,15 @@ public class Add_New_Item extends javax.swing.JFrame {
                         .addComponent(jLabel4)))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtItemPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(selectedFood)
+                    .addComponent(selectedDrink)
                     .addComponent(jLabel5))
                 .addGap(20, 20, 20)
-                .addComponent(additemback)
+                .addComponent(btn_save)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel6)
                 .addContainerGap())
@@ -172,6 +207,82 @@ public class Add_New_Item extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nameActionPerformed
+
+    private void txt_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_priceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_priceActionPerformed
+
+    private void selectedFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectedFoodActionPerformed
+
+    private void selectedDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedDrinkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectedDrinkActionPerformed
+    String getCategory() {
+        if (selectedFood.isSelected()) {
+            return "food";
+
+        } else if (selectedDrink.isSelected()) {
+            return "drink";
+        } else {
+            return null;
+        }
+    }
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        // TODO add your handling code here:
+        String itemName = txt_name.getText().trim();
+        String itemPrice = txt_price.getText().trim();
+        String category = getCategory();
+        if (itemName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the item name.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        double price;
+        try {
+
+            price = Double.parseDouble(itemPrice);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter the item price.(Input Number Only!!)", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+//        if (itemPrice.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Please enter the item price.", "Input Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+//        try {
+//            Double.valueOf(itemPrice);
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "Please enter a valid price.", "Input Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+        if (category == null) {
+            JOptionPane.showMessageDialog(this, "Please Select Category!!", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+        DBAppHandler dbhadler = new DBAppHandler();
+        boolean add = dbhadler.add(category, itemName, price);
+        if (add) {
+            JOptionPane.showMessageDialog(this, itemName + " has added Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+            txt_name.setText("");
+            txt_price.setText("");
+            selectedFood.setSelected(false);
+            selectedDrink.setSelected(false);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Failed to add item", "Insert Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_saveActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        Dashboard.main(null);
+        this.dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,8 +320,8 @@ public class Add_New_Item extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton additemback;
-    private javax.swing.JButton additemback1;
+    private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_save;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -218,9 +329,9 @@ public class Add_New_Item extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField txtItemName1;
-    private javax.swing.JTextField txtItemPrice;
+    private javax.swing.JRadioButton selectedDrink;
+    private javax.swing.JRadioButton selectedFood;
+    private javax.swing.JTextField txt_name;
+    private javax.swing.JTextField txt_price;
     // End of variables declaration//GEN-END:variables
 }

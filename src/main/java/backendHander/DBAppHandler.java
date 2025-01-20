@@ -130,6 +130,47 @@ public class DBAppHandler {
         }
         return resultData;
     }
+//new 
+    public List<List<Object>> queryMenuItemInUpdatePage(String item_name) {
+//        if (!item_name.equals("food") || !item_name.equals("drink")) {
+//            System.out.println("Please make sure the table is correct, food_menu & drink_menu");
+//            return null;
+//        }
+        Connection Conn = null;
+        List<List<Object>> resultData = new ArrayList<>();
+        try {
+            Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
+            PreparedStatement pstmt = Conn.prepareStatement("SELECT * FROM menu_item WHERE item_name = ?");
+            pstmt.setObject(1, item_name);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                List<Object> prepList = new ArrayList<>();
+                prepList.add(rs.getInt("item_id"));
+                prepList.add(rs.getString("item_name"));
+                prepList.add(rs.getDouble("item_price"));
+                prepList.add(rs.getString("item_category"));
+                resultData.add(prepList);
+            }
+        } catch (SQLException e) {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (Conn != null) {
+                    Conn.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("Database connection failed to close");
+                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                System.out.println(e);
+                return null;
+            }
+        }
+        return resultData;
+    }
 
     public boolean add(String categoryName, String itemName, double itemPrice) {
         Connection Conn = null;
