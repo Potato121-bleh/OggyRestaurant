@@ -4,6 +4,10 @@
  */
 package GUIpages;
 
+import backendHander.DBAppHandler;
+import java.util.List;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +21,10 @@ public class UpdateItemPage extends javax.swing.JFrame {
      */
     public UpdateItemPage() {
         initComponents();
+        DisplayItemNameComboBox();
+        ButtonGroup btngp = new ButtonGroup();
+        btngp.add(selectedFood);
+        btngp.add(selectedDrink);
     }
 
     /**
@@ -32,13 +40,13 @@ public class UpdateItemPage extends javax.swing.JFrame {
         btn_back = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txt_name = new javax.swing.JTextField();
+        txt_price = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        selectedFood = new javax.swing.JRadioButton();
+        selectedDrink = new javax.swing.JRadioButton();
         btn_submit = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -55,12 +63,17 @@ public class UpdateItemPage extends javax.swing.JFrame {
 
         jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Select Item to update");
 
-        jTextField2.setBackground(new java.awt.Color(204, 204, 204));
+        txt_name.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
+        txt_price.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel4.setText("Item Name:");
 
@@ -68,12 +81,12 @@ public class UpdateItemPage extends javax.swing.JFrame {
 
         jLabel5.setText("Item Type:");
 
-        jRadioButton1.setText("Dish");
+        selectedFood.setText("Food");
 
-        jRadioButton2.setText("Drink");
+        selectedDrink.setText("Drink");
 
         btn_submit.setBackground(new java.awt.Color(204, 204, 204));
-        btn_submit.setText("Submit");
+        btn_submit.setText("Save");
         btn_submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_submitActionPerformed(evt);
@@ -104,11 +117,11 @@ public class UpdateItemPage extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addGap(0, 0, Short.MAX_VALUE)
-                                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                             .addGap(58, 58, 58))))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(195, 195, 195)
@@ -117,11 +130,11 @@ public class UpdateItemPage extends javax.swing.JFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(selectedFood, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(selectedDrink, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(39, 39, 39)))))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -145,14 +158,14 @@ public class UpdateItemPage extends javax.swing.JFrame {
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(82, 82, 82)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(32, 32, 32)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txt_price, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,8 +173,8 @@ public class UpdateItemPage extends javax.swing.JFrame {
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
+                    .addComponent(selectedFood)
+                    .addComponent(selectedDrink)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,17 +207,103 @@ public class UpdateItemPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_backActionPerformed
 
+    String getCategory() {
+        if (selectedFood.isSelected()) {
+            return "food";
+
+        } else if (selectedDrink.isSelected()) {
+            return "drink";
+        } else {
+            return null;
+        }
+    }
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        int CfSaveEdit = JOptionPane.showConfirmDialog(this, "Are you sure you want to save this change?",
+            String itemName = txt_name.getText().trim();
+            String itemPrice = txt_price.getText().trim();
+            String category = getCategory();
+        int CfSaveEdit = JOptionPane.showConfirmDialog(this, "Are you sure you want to update "+ itemName,
                 "Confirm Change?",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        if(CfSaveEdit == JOptionPane.YES_OPTION){
-        Dashboard.main(null);
-        this.dispose();
+        if (CfSaveEdit == JOptionPane.YES_OPTION) {
+            
+            if (itemName.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter the item name.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            double price;
+            try {
+
+                price = Double.parseDouble(itemPrice);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Please enter the item price.(Input Number Only!!)", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if (category == null) {
+                JOptionPane.showMessageDialog(this, "Please Select Category!!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
+            DBAppHandler dbHandler = new DBAppHandler();
+            int selectedItem = Integer.parseInt((String) jComboBox1.getSelectedItem());
+//            List<List<Object>> menuItems = dbHandler.queryMenuItemInUpdatePage(selectedItem);
+            System.out.println(selectedItem);
+
+//        int itemId = (int) menuItems.get(0).get(0);
+            boolean update = dbHandler.update(category, itemName, price, selectedItem);
+            if (update) {
+                JOptionPane.showMessageDialog(this, itemName + " has updated Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                txt_name.setText("");
+                txt_price.setText("");
+                selectedFood.setSelected(false);
+                selectedDrink.setSelected(false);
+                DisplayItemNameComboBox();
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Failed to update item", "Update Failed", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btn_submitActionPerformed
+    private void DisplayItemNameComboBox() {
+
+        DBAppHandler dbHandler = new DBAppHandler();
+        List<List<Object>> menuItems = dbHandler.getMenuItem();
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+        for (List<Object> row : menuItems) {
+            int itemId = (int) row.get(0);
+            comboBoxModel.addElement(String.valueOf(itemId));  // Convert the itemId to String
+        }
+        jComboBox1.setModel(comboBoxModel);
+
+    }
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+//        String selectedItem = (String) jComboBox1.getSelectedItem();
+        int selectedItem = Integer.parseInt((String) jComboBox1.getSelectedItem());
+//        if (selectedItem == null) {
+//            return;
+//        }
+        DBAppHandler db = new DBAppHandler();
+        List<List<Object>> menuItems = db.queryMenuItemInUpdatePage(selectedItem);
+        List<Object> menuItem = menuItems.get(0);
+        try {
+            txt_name.setText((String) menuItem.get(1));          //  Name
+            txt_price.setText(String.valueOf(menuItem.get(2))); //  Price
+            selectedDrink.setSelected(false);
+            selectedFood.setSelected(false);
+
+            String category = (String) menuItem.get(3);
+            if ("food".equalsIgnoreCase(category)) {
+                selectedFood.setSelected(true);
+            } else if ("drink".equalsIgnoreCase(category)) {
+                selectedDrink.setSelected(true);
+            } else {
+                selectedDrink.setSelected(false);
+                selectedFood.setSelected(false);
+            }
+        } catch (IndexOutOfBoundsException | ClassCastException e) {
+            JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,9 +351,9 @@ public class UpdateItemPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JRadioButton selectedDrink;
+    private javax.swing.JRadioButton selectedFood;
+    private javax.swing.JTextField txt_name;
+    private javax.swing.JTextField txt_price;
     // End of variables declaration//GEN-END:variables
 }

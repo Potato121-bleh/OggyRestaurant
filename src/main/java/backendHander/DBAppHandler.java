@@ -113,14 +113,14 @@ public class DBAppHandler {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
             PreparedStatement pstm = Conn.prepareStatement("Select * from menu_item");
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
-            List<Object> row = new ArrayList<>();
-            row.add(rs.getInt("item_id"));
-            row.add(rs.getString("item_name"));
-            row.add(rs.getString("item_price"));
-            row.add(rs.getString("item_category"));
-            resultData.add(row);
-            
+            while (rs.next()) {
+                List<Object> row = new ArrayList<>();
+                row.add(rs.getInt("item_id"));
+                row.add(rs.getString("item_name"));
+                row.add(rs.getString("item_price"));
+                row.add(rs.getString("item_category"));
+                resultData.add(row);
+
             }
 
         } catch (SQLException e) {
@@ -131,7 +131,8 @@ public class DBAppHandler {
         return resultData;
     }
 //new 
-    public List<List<Object>> queryMenuItemInUpdatePage(String item_name) {
+
+    public List<List<Object>> queryMenuItemInUpdatePage(int item_id) {
 //        if (!item_name.equals("food") || !item_name.equals("drink")) {
 //            System.out.println("Please make sure the table is correct, food_menu & drink_menu");
 //            return null;
@@ -140,8 +141,8 @@ public class DBAppHandler {
         List<List<Object>> resultData = new ArrayList<>();
         try {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
-            PreparedStatement pstmt = Conn.prepareStatement("SELECT * FROM menu_item WHERE item_name = ?");
-            pstmt.setObject(1, item_name);
+            PreparedStatement pstmt = Conn.prepareStatement("SELECT * FROM menu_item WHERE item_id = ?");
+            pstmt.setObject(1, item_id);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -219,38 +220,101 @@ public class DBAppHandler {
         return true;
     }
 
+//    public boolean update(String categoryName, String itemName, double itemPrice, int itemId) {
+//        Connection Conn = null;
+//        try {
+//            Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
+//            Conn.setAutoCommit(false);
+//            // Retrieve data for the comparation
+//            PreparedStatement queryPstmt = Conn.prepareStatement("SELECT * FROM menu_item WHERE item_id = ?");
+//            queryPstmt.setObject(1, itemId);
+//            System.out.println(queryPstmt);
+//            ResultSet queryRS = queryPstmt.executeQuery();
+//            System.out.println(queryRS);
+//            queryRS.next();
+//
+//            categoryName = (categoryName.equals("")) ? (queryRS.getString("item_category")) : (categoryName);
+//            itemName = (itemName.equals("")) ? (queryRS.getString("item_name")) : (itemName);
+//            itemPrice = (itemPrice == 0.00) ? (queryRS.getDouble("item_price")) : (itemPrice);
+//
+//            PreparedStatement updatePstmt = Conn.prepareStatement(
+//                    "UPDATE menu_item SET "
+//                    + "item_name = ? ,"
+//                    + "item_price = ? ,"
+//                    + "item_category = ?"
+//            );
+//
+//            updatePstmt.setObject(1, itemName);
+//            updatePstmt.setObject(2, itemPrice);
+//            updatePstmt.setObject(3, categoryName);
+//            int updateAffectedRow = updatePstmt.executeUpdate();
+//            if (updateAffectedRow != 1) {
+//                throw new Exception("unexpected behavior from database");
+//            }
+//
+//            Conn.commit();
+//            return true;
+//        } catch (Exception e) {
+//            try {
+//                if (Conn != null) {
+//                    Conn.rollback();
+//                }
+//            } catch (SQLException rollbackErr) {
+//                System.out.println(rollbackErr);
+//                System.out.println("!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!");
+//                System.out.println("Something went wrong, Could be rollback failed");
+//            }
+//            System.out.println(e);
+//            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//            System.out.println("failed to perform update transaction");
+//            return false;
+//        } finally {
+//            if (Conn != null) {
+//                try {
+//                    Conn.setAutoCommit(true);
+//                    Conn.close();
+//                } catch (SQLException e) {
+//                    System.out.println(e);
+//                    System.out.println("failed to perform update transaction");
+//                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//                }
+//            }
+//        }
+//    }
     public boolean update(String categoryName, String itemName, double itemPrice, int itemId) {
         Connection Conn = null;
         try {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
             Conn.setAutoCommit(false);
-            // Retrieve data for the comparation
+
             PreparedStatement queryPstmt = Conn.prepareStatement("SELECT * FROM menu_item WHERE item_id = ? ");
             queryPstmt.setObject(1, itemId);
             ResultSet queryRS = queryPstmt.executeQuery();
-            queryRS.next();
 
-            categoryName = (categoryName.equals("")) ? (queryRS.getString("item_category")) : (categoryName);
-            itemName = (itemName.equals("")) ? (queryRS.getString("item_name")) : (itemName);
-            itemPrice = (itemPrice == 0.00) ? (queryRS.getDouble("item_price")) : (itemPrice);
+            if (queryRS.next()) {
 
-            PreparedStatement updatePstmt = Conn.prepareStatement(
-                    "UPDATE menu_item SET "
-                    + "item_name = ? ,"
-                    + "item_price = ? ,"
-                    + "item_category = ?"
-            );
+                categoryName = (categoryName.equals("")) ? (queryRS.getString("item_category")) : (categoryName);
+                itemName = (itemName.equals("")) ? (queryRS.getString("item_name")) : (itemName);
+                itemPrice = (itemPrice == 0.00) ? (queryRS.getDouble("item_price")) : (itemPrice);
 
-            updatePstmt.setObject(1, itemName);
-            updatePstmt.setObject(2, itemPrice);
-            updatePstmt.setObject(3, categoryName);
-            int updateAffectedRow = updatePstmt.executeUpdate();
-            if (updateAffectedRow != 1) {
-                throw new Exception("unexpected behavior from database");
+                PreparedStatement updatePstmt = Conn.prepareStatement(
+                        "UPDATE menu_item SET item_name = ?, item_price = ?, item_category = ? WHERE item_id = ?");
+
+                updatePstmt.setObject(1, itemName);
+                updatePstmt.setObject(2, itemPrice);
+                updatePstmt.setObject(3, categoryName);
+                updatePstmt.setObject(4, itemId);
+
+                int updateAffectedRow = updatePstmt.executeUpdate();
+                if (updateAffectedRow != 1) {
+                    throw new Exception("Unexpected behavior from database during update");
+                }
+                Conn.commit();
+                return true;
+            } else {
+                throw new Exception("No item found with the specified item_id");
             }
 
-            Conn.commit();
-            return true;
         } catch (Exception e) {
             try {
                 if (Conn != null) {
