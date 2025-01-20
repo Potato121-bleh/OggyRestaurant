@@ -4,13 +4,20 @@
 
 package Oggy;
 
+import backendHander.DBAppHandler;
+
 /**
  *
  * @author ahpka
  */
-public class Oggy {
 
+public class Oggy {
+    
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        DBAppHandler authentication = new DBAppHandler();
+        System.out.println(authentication.validateUserCrediential("potato-bleh", "kilozin123"));
+        System.out.println(authentication.queryMenuItem("food_menu"));
+
     }
 }
