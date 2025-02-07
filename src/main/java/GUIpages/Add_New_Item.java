@@ -5,6 +5,7 @@
 package GUIpages;
 
 import backendHander.DBAppHandler;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +18,10 @@ public class Add_New_Item extends javax.swing.JFrame {
      * Creates new form Add_New_Item
      */
     public Add_New_Item() {
-        initComponents();
+        initComponents();ButtonGroup btngp = new ButtonGroup();
+        btngp.add(selectedFood);
+        btngp.add(selectedDrink);
+        
     }
 
     /**
@@ -246,6 +250,10 @@ public class Add_New_Item extends javax.swing.JFrame {
             price = Double.parseDouble(itemPrice);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter the item price.(Input Number Only!!)", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(price>20){
+            JOptionPane.showMessageDialog(this, "Item price is too expensive.(Please Input below 20)", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

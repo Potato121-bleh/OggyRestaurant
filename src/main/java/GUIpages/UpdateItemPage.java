@@ -82,8 +82,18 @@ public class UpdateItemPage extends javax.swing.JFrame {
         jLabel5.setText("Item Type:");
 
         selectedFood.setText("Food");
+        selectedFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedFoodActionPerformed(evt);
+            }
+        });
 
         selectedDrink.setText("Drink");
+        selectedDrink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectedDrinkActionPerformed(evt);
+            }
+        });
 
         btn_submit.setBackground(new java.awt.Color(204, 204, 204));
         btn_submit.setText("Save");
@@ -304,6 +314,14 @@ public class UpdateItemPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error : " + e.getMessage());
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void selectedDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedDrinkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectedDrinkActionPerformed
+
+    private void selectedFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedFoodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_selectedFoodActionPerformed
 
     /**
      * @param args the command line arguments
