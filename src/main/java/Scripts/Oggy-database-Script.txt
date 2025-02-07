@@ -1,0 +1,50 @@
+Create table user_auth(user_id Serial primary key, user_name varchar(50), user_password varchar(50), user_balance decimal(10,2));
+
+Create table menu_item(item_id SERIAL PRIMARY KEY, item_name varchar(50), item_price decimal(10,2),item_category varchar(50));
+Create table order_transaction(transaction_id serial primary key, user_id int references user_auth(user_id), 
+item_id int references menu_item(item_id));
+
+
+-- insert menu_item
+INSERT INTO menu_item (item_name, item_price, item_category) VALUES
+('Steak', 6.58, 'food'),
+('Sandwich', 7.82, 'food'),
+('Milk Tea', 1.75, 'drink'),
+('Milkshake', 4.80, 'drink'),
+('Taco', 5.25, 'food'),
+('Salad', 4.48, 'food'),
+('Kuy Teav', 6.81, 'food'),
+('Smoothie', 6.05, 'drink'),
+('Coffee', 3.30, 'drink'),
+('Wine', 6.97, 'drink'),
+('Soup', 4.58, 'food'),
+('Amok', 7.62, 'food'),
+('Lok Lak', 3.63, 'food'),
+('Smoothie', 3.17, 'drink'),
+('Tea', 6.00, 'drink'),
+('Bai Sach Chrouk', 6.15, 'food'),
+('Juice', 5.75, 'drink'),
+('Coffee', 5.95, 'drink'),
+('Wine', 6.27, 'drink'),
+('Burger', 3.62, 'food'),
+('Bai Sach Chrouk', 5.08, 'food'),
+('Water', 5.17, 'drink'),
+('Salad', 3.45, 'food'),
+('Tea', 7.87, 'drink'),
+('Pizza', 5.61, 'food'),
+('Soda', 3.40, 'drink'),
+('Ang Dtray-Meuk', 4.92, 'food'),
+('Pizza', 5.67, 'food'),
+('Beer', 7.44, 'drink'),
+('Wine', 7.19, 'drink');
+
+-- ===========Insert user_auth
+
+INSERT INTO user_auth (user_name, user_password, user_balance) 
+VALUES ('Oggy', '121212', 1000.00);
+
+-- ==== Insert order_transaction
+Insert into order_transaction (user_id, item_id) values (1,4)
+Select * From order_transaction
+
+
