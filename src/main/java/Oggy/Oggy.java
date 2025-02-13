@@ -19,8 +19,7 @@ public class Oggy {
         DBAppHandler authentication = new DBAppHandler();
         System.out.println(authentication.validateUserCrediential("potato-bleh", "kilozin123"));
         System.out.println(authentication.queryMenuItem("food_menu"));
-
         Login s = new Login();
         s.setVisible(true);
-    }
+    }  
 }
