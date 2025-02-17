@@ -50,12 +50,11 @@ public class Add_New_Item extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        txt_price.setBackground(new java.awt.Color(255, 255, 255));
-        txt_price.setForeground(new java.awt.Color(255, 255, 255));
+        txt_price.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_priceActionPerformed(evt);
@@ -72,8 +71,7 @@ public class Add_New_Item extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(25, 36, 0, 0);
         jPanel1.add(txt_price, gridBagConstraints);
 
-        txt_name.setBackground(new java.awt.Color(255, 255, 255));
-        txt_name.setForeground(new java.awt.Color(255, 255, 255));
+        txt_name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nameActionPerformed(evt);
@@ -116,9 +114,7 @@ public class Add_New_Item extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(56, 36, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
-        btn_save.setBackground(new java.awt.Color(102, 102, 102));
         btn_save.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        btn_save.setForeground(new java.awt.Color(255, 255, 255));
         btn_save.setText("Add Ingredient");
         btn_save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,9 +130,7 @@ public class Add_New_Item extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(38, 16, 0, 83);
         jPanel1.add(btn_save, gridBagConstraints);
 
-        btn_back.setBackground(new java.awt.Color(102, 102, 102));
         btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btn_back.setForeground(new java.awt.Color(255, 255, 255));
         btn_back.setText("Back");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
