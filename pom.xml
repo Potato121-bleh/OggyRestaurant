@@ -18,22 +18,9 @@
             <version>42.6.0</version>
         </dependency>
         <dependency>
-<<<<<<< HEAD
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version> 
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE230</version>
-=======
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE240</version>
->>>>>>> ed541b62bb99eb7280c8b4680895a60e09f72ef3
         </dependency>
     </dependencies>
-    
-    
 </project>

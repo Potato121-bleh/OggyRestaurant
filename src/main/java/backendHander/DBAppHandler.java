@@ -25,13 +25,13 @@ import java.util.Map;
 // Passed data:
 // db.add("user_info", "id", "name", "price")
 public class DBAppHandler {
-//    String connectionString = "jdbc:postgresql://localhost:5432/java_restaurant_project";
-//    String dbUsername = "postgres";
-//    String dbPassword = "nice123";
-
-    String connectionString = "jdbc:postgresql://localhost:5432/OggyShop";
+    String connectionString = "jdbc:postgresql://localhost:5432/java_restaurant_project";
     String dbUsername = "postgres";
-    String dbPassword = "123";
+    String dbPassword = "nice123";
+
+//    String connectionString = "jdbc:postgresql://localhost:5432/OggyShop";
+//    String dbUsername = "postgres";
+//    String dbPassword = "123";
 
     public boolean validateUserCrediential(String inputUsername, String inputPassword) {
         Connection Conn = null;
