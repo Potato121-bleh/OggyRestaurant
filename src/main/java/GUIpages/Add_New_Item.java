@@ -301,17 +301,17 @@ public class Add_New_Item extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please Select Category!!", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
         DBAppHandler dbhadler = new DBAppHandler();
-        boolean add = dbhadler.add(category, itemName, price);
-        if (add) {
-            JOptionPane.showMessageDialog(this, itemName + " has added Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
-            txt_name.setText("");
-            txt_price.setText("");
-            selectedFood.setSelected(false);
-            selectedDrink.setSelected(false);
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Failed to add item", "Insert Failed", JOptionPane.ERROR_MESSAGE);
-        }
+//        boolean add = dbhadler.add(category, itemName, price);
+//        if (add) {
+//            JOptionPane.showMessageDialog(this, itemName + " has added Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+//            txt_name.setText("");
+//            txt_price.setText("");
+//            selectedFood.setSelected(false);
+//            selectedDrink.setSelected(false);
+//        } else {
+//
+//            JOptionPane.showMessageDialog(this, "Failed to add item", "Insert Failed", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_btn_saveActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed

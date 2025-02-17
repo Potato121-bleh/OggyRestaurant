@@ -131,10 +131,12 @@ public class Login extends javax.swing.JFrame {
         String username = txt_username.getText();
         String password = String.valueOf(txt_password.getPassword());
         //  check if user input or not???
+        
         if (username.trim().isEmpty() || password.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Username and Password Fields Cannot be empty!!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
         DBAppHandler dbHandler = new DBAppHandler();
         boolean isValidUser = dbHandler.validateUserCrediential(username, password);
         if (isValidUser) {
