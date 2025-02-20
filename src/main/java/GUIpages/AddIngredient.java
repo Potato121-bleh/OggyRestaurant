@@ -4,6 +4,15 @@
  */
 package GUIpages;
 
+import backendHander.DBAppHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ADMIN
@@ -15,7 +24,15 @@ public class AddIngredient extends javax.swing.JFrame {
      */
     public AddIngredient() {
         initComponents();
+        Display();
+        jList1.setModel(listModel);
+        lbName.setText(StoreItem.ItemName);
+        String price = StoreItem.ItemPrice + "";
+        lbPrice.setText(price);
+        lbCate.setText(StoreItem.category);
+
     }
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,13 +49,19 @@ public class AddIngredient extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        txt_name = new javax.swing.JTextField();
+        IngreNameCombo = new javax.swing.JComboBox<>();
+        txt_unit = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        btn_back2 = new javax.swing.JButton();
-        btn_back3 = new javax.swing.JButton();
+        btn_done = new javax.swing.JButton();
+        btn_add = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lbName = new javax.swing.JLabel();
+        lbPrice = new javax.swing.JLabel();
+        lbCate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +80,7 @@ public class AddIngredient extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 47;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -66,7 +90,7 @@ public class AddIngredient extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
         jLabel2.setText("Add Ingredient");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
@@ -81,7 +105,7 @@ public class AddIngredient extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 24, 0, 0);
         jPanel1.add(jLabel4, gridBagConstraints);
@@ -89,43 +113,48 @@ public class AddIngredient extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("Input required Unit");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 83, 0, 0);
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IngreNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        IngreNameCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IngreNameComboActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 8;
         gridBagConstraints.ipadx = 75;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(27, 24, 0, 0);
-        jPanel1.add(jComboBox1, gridBagConstraints);
+        jPanel1.add(IngreNameCombo, gridBagConstraints);
 
-        txt_name.addActionListener(new java.awt.event.ActionListener() {
+        txt_unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_nameActionPerformed(evt);
+                txt_unitActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 136;
         gridBagConstraints.ipady = 19;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(27, 52, 0, 0);
-        jPanel1.add(txt_name, gridBagConstraints);
+        jPanel1.add(txt_unit, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setText("Add Ingredient");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 106, 0, 0);
@@ -139,57 +168,109 @@ public class AddIngredient extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridx = 13;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridheight = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 135;
-        gridBagConstraints.ipady = 157;
+        gridBagConstraints.ipadx = 147;
+        gridBagConstraints.ipady = 222;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(27, 92, 0, 24);
+        gridBagConstraints.insets = new java.awt.Insets(27, 92, 0, 0);
         jPanel1.add(jScrollPane1, gridBagConstraints);
 
-        btn_back2.setBackground(new java.awt.Color(204, 204, 204));
-        btn_back2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_back2.setText("Done");
-        btn_back2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), null, null));
-        btn_back2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_back2.addActionListener(new java.awt.event.ActionListener() {
+        btn_done.setBackground(new java.awt.Color(204, 204, 204));
+        btn_done.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_done.setText("Done");
+        btn_done.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), null, null));
+        btn_done.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_done.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_back2ActionPerformed(evt);
+                btn_doneActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridx = 13;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.ipadx = 53;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 134, 19, 0);
-        jPanel1.add(btn_back2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(18, 134, 0, 0);
+        jPanel1.add(btn_done, gridBagConstraints);
 
-        btn_back3.setBackground(new java.awt.Color(204, 204, 204));
-        btn_back3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btn_back3.setText("Add");
-        btn_back3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), null, null));
-        btn_back3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_back3.addActionListener(new java.awt.event.ActionListener() {
+        btn_add.setBackground(new java.awt.Color(204, 204, 204));
+        btn_add.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btn_add.setText("Add");
+        btn_add.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), null, null));
+        btn_add.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_back3ActionPerformed(evt);
+                btn_addActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.ipadx = 55;
         gridBagConstraints.ipady = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(18, 107, 0, 0);
-        jPanel1.add(btn_back3, gridBagConstraints);
+        jPanel1.add(btn_add, gridBagConstraints);
+
+        jLabel1.setText("Menu Name :  ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 24, 0, 0);
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        jLabel3.setText("Price : ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 0, 0);
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        jLabel7.setText("Category :");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 24, 0, 0);
+        jPanel1.add(jLabel7, gridBagConstraints);
+
+        lbName.setText("hi");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 1, 0, 0);
+        jPanel1.add(lbName, gridBagConstraints);
+
+        lbPrice.setText("jLabel8");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
+        jPanel1.add(lbPrice, gridBagConstraints);
+
+        lbCate.setText("10");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
+        jPanel1.add(lbCate, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,37 +278,124 @@ public class AddIngredient extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void Display() {
+        try {
+            DBAppHandler db = new DBAppHandler();
+            List<List<Object>> menuItems = db.getIngre();
+            DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+            for (List<Object> row : menuItems) {
+                int itemId = (int) row.get(0);
+                String itemName = (String) row.get(1);
+                comboBoxModel.addElement(itemId + " - " + itemName);
+            }
+            IngreNameCombo.setModel(comboBoxModel);
+        } catch (Exception e) {
+            System.out.println("Failed to populate combo box: " + e.getMessage());
+        }
+    }
     private void btn_back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back1ActionPerformed
         // TODO add your handling code here:
-        Dashboard.main(null);
+        Add_New_Item.main(null);
         this.dispose();
     }//GEN-LAST:event_btn_back1ActionPerformed
 
-    private void txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nameActionPerformed
+    private void txt_unitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_unitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_nameActionPerformed
+    }//GEN-LAST:event_txt_unitActionPerformed
 
-    private void btn_back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back2ActionPerformed
+    private void btn_doneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_back2ActionPerformed
+        DBAppHandler db = new DBAppHandler();
+        String cateName = StoreItem.category;
+        String ItemName = StoreItem.ItemName;
+        Double price = StoreItem.ItemPrice;
+        
+        
+        List<Map<Integer, Integer>> menuIng = new ArrayList<>();
+        Map<Integer, Integer> ingredients = new HashMap<>();
+        int IngreId = StoreItem.ingreId;
+        int unit = StoreItem.unit;
+        ingredients.put(IngreId, unit);
+        menuIng.add(ingredients);
+//        for (int i = 0; i < listModel.size(); i++) {
+//
+//        }
 
-    private void btn_back3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back3ActionPerformed
+        db.add(cateName, ItemName, price, menuIng);
+    }//GEN-LAST:event_btn_doneActionPerformed
+
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_back3ActionPerformed
+
+        String name = IngreNameCombo.getSelectedItem().toString().trim();
+        String qty = txt_unit.getText().trim();
+        int Unit;
+        try {
+            Unit = Integer.parseInt(qty);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter the ingredient unit.(Input Number Only!!)", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Unit > 1000) {
+            JOptionPane.showMessageDialog(this, "Ingredient must less then 1000g", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        StoreItem.unit = Unit;
+
+//        get ingredient Id
+        String getIngreId = (String) IngreNameCombo.getSelectedItem();
+        String[] nice = getIngreId.split(" - ");
+        if (nice.length >= 1) {
+            try {
+                int selectedId = Integer.parseInt(nice[0]);
+                StoreItem.ingreId = selectedId;
+                System.out.println(StoreItem.ingreId);
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error");
+            }
+
+        }
+//        end get ingredient Id
+
+//      Here for display data in list when add 
+        if (isExist(name)) {
+            JOptionPane.showMessageDialog(this, "this ingredient is already added", "DEplicate Ingredient", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        String ItemInlist = name + " | Unit: " + qty + "g";
+        listModel.addElement(ItemInlist);
+        txt_unit.setText("");
+
+    }//GEN-LAST:event_btn_addActionPerformed
+//here to check item exist in list or not
+
+    private boolean isExist(String Selected) {
+        for (int i = 0; i < listModel.size(); i++) {
+            if (listModel.get(i).contains(Selected)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void IngreNameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngreNameComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IngreNameComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,17 +433,23 @@ public class AddIngredient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> IngreNameCombo;
+    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_back1;
-    private javax.swing.JButton btn_back2;
-    private javax.swing.JButton btn_back3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btn_done;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txt_name;
+    private javax.swing.JLabel lbCate;
+    private javax.swing.JLabel lbName;
+    private javax.swing.JLabel lbPrice;
+    private javax.swing.JTextField txt_unit;
     // End of variables declaration//GEN-END:variables
 }

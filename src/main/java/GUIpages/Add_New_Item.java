@@ -5,6 +5,7 @@
 package GUIpages;
 
 import backendHander.DBAppHandler;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
@@ -18,10 +19,21 @@ public class Add_New_Item extends javax.swing.JFrame {
      * Creates new form Add_New_Item
      */
     public Add_New_Item() {
-        initComponents();ButtonGroup btngp = new ButtonGroup();
+        initComponents();
+        ButtonGroup btngp = new ButtonGroup();
         btngp.add(selectedFood);
         btngp.add(selectedDrink);
-        
+        txt_name.setText(StoreItem.ItemName);
+        txt_price.setText(String.valueOf(StoreItem.ItemPrice));
+        if ("food".equalsIgnoreCase(StoreItem.category)) {
+            selectedFood.setSelected(true);
+        } else if ("drink".equalsIgnoreCase(StoreItem.category)) {
+            selectedDrink.setSelected(true);
+        } else {
+            selectedDrink.setSelected(false);
+            selectedFood.setSelected(false);
+        }
+
     }
 
     /**
@@ -254,7 +266,16 @@ public class Add_New_Item extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter the item price.(Input Number Only!!)", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(price>20){
+//        if (price == 0.00) {
+//            JOptionPane.showMessageDialog(this, "Item price should not be 0", "Input Error", JOptionPane.ERROR_MESSAGE);
+//            return;
+//        }
+        if (price < 1.00) {
+            JOptionPane.showMessageDialog(this, "Item price should be at least $1", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (price > 20) {
             JOptionPane.showMessageDialog(this, "Item price is too expensive.(Please Input below 20)", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -271,8 +292,10 @@ public class Add_New_Item extends javax.swing.JFrame {
 //        }
         if (category == null) {
             JOptionPane.showMessageDialog(this, "Please Select Category!!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        DBAppHandler dbhadler = new DBAppHandler();
+
+//        DBAppHandler dbhadler = new DBAppHandler();
 //        boolean add = dbhadler.add(category, itemName, price);
 //        if (add) {
 //            JOptionPane.showMessageDialog(this, itemName + " has added Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -284,7 +307,60 @@ public class Add_New_Item extends javax.swing.JFrame {
 //
 //            JOptionPane.showMessageDialog(this, "Failed to add item", "Insert Failed", JOptionPane.ERROR_MESSAGE);
 //        }
+        if (checkNameExist(itemName)) {
+            JOptionPane.showMessageDialog(this, itemName + " is already Exit!!", "Duplicate menu", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int id = GetMenuID();
+            StoreItem.itemId = id;
+            StoreItem.ItemName = itemName;
+            StoreItem.ItemPrice = price;
+            StoreItem.category = category;
+            System.out.println(StoreItem.ItemName);
+            System.out.println(StoreItem.ItemPrice);
+            System.out.println(StoreItem.category);
+//            System.out.println(StoreItem.itemId);
+            AddIngredient.main(null);
+            this.dispose();
+
+        }
+
+
     }//GEN-LAST:event_btn_saveActionPerformed
+
+//    get menu id 
+    private int GetMenuID() {
+        DBAppHandler dbhandler = new DBAppHandler();
+        int lastInsertedId = 0;
+
+        List<List<Object>> menuItems = dbhandler.getMenuItem();
+
+        if (!menuItems.isEmpty()) {
+            List<Object> lastRow = menuItems.get(menuItems.size() - 1);
+            if (!lastRow.isEmpty()) {
+                lastInsertedId = (int) lastRow.get(0);
+            }
+        }
+
+        return lastInsertedId + 1;
+    }
+//  this function to check menu is exist??
+
+    private boolean checkNameExist(String menuName) {
+        DBAppHandler db = new DBAppHandler();
+        List<List<Object>> menuItems = db.getMenuItem();
+        for (List<Object> item : menuItems) {
+//            System.out.println(item.get(1));
+            if (!item.isEmpty() && item.get(1) != null && item.get(1) instanceof String) {
+                String name = (String) item.get(1);
+                if (name.equalsIgnoreCase(menuName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:

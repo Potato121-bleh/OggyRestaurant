@@ -25,13 +25,13 @@ import java.util.Map;
 // Passed data:
 // db.add("user_info", "id", "name", "price")
 public class DBAppHandler {
-    String connectionString = "jdbc:postgresql://localhost:5432/java_restaurant_project";
-    String dbUsername = "postgres";
-    String dbPassword = "nice123";
-
-//    String connectionString = "jdbc:postgresql://localhost:5432/OggyShop";
+//    String connectionString = "jdbc:postgresql://localhost:5432/java_restaurant_project";
 //    String dbUsername = "postgres";
-//    String dbPassword = "123";
+//    String dbPassword = "nice123";
+
+    String connectionString = "jdbc:postgresql://localhost:5432/OggyShop";
+    String dbUsername = "postgres";
+    String dbPassword = "123";
 
     public boolean validateUserCrediential(String inputUsername, String inputPassword) {
         Connection Conn = null;
@@ -123,6 +123,29 @@ public class DBAppHandler {
                 row.add(rs.getString("item_name"));
                 row.add(rs.getString("item_price"));
                 row.add(rs.getString("item_category"));
+                resultData.add(row);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("message" + e);
+            return null;
+
+        }
+        return resultData;
+    }
+    
+    public List<List<Object>> getIngre() {
+        Connection Conn = null;
+        List<List<Object>> resultData = new ArrayList<>();
+        try {
+            Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
+            PreparedStatement pstm = Conn.prepareStatement("Select * from ingredient_db");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                List<Object> row = new ArrayList<>();
+                row.add(rs.getInt("ingredient_id"));
+                row.add(rs.getString("name"));
+                row.add(rs.getString("total_unit"));
                 resultData.add(row);
             }
 

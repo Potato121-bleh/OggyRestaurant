@@ -55,6 +55,11 @@ public class DeletePage extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         btn_back1.setBackground(new java.awt.Color(204, 204, 204));
         btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -122,11 +127,11 @@ public class DeletePage extends javax.swing.JFrame {
 private void DeleteCombo() {
         try {
             DBAppHandler db = new DBAppHandler();
-            List<List<Object>> menuItems = db.getMenuItem(); // Assume this retrieves all menu items
+            List<List<Object>> menuItems = db.getMenuItem(); 
             DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
             for (List<Object> row : menuItems) {
                 int itemId = (int) row.get(0);
-                String itemName = (String) row.get(1); // Assuming item name is the second column
+                String itemName = (String) row.get(1); 
                 comboBoxModel.addElement(itemId + " - " + itemName); // Display item ID and name
             }
             jComboBox1.setModel(comboBoxModel);
@@ -169,6 +174,10 @@ private void DeleteCombo() {
         Dashboard.main(null);
         this.dispose();
     }//GEN-LAST:event_btn_back1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
