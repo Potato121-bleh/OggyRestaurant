@@ -59,3 +59,4 @@ Insert into order_transaction (user_id, item_id) values (1,4)
 Select * From order_transaction
 
 
+Insert into ingredient_db(name, total_unit) values ('melon', 1000),('cream',2000)
