@@ -323,8 +323,7 @@ public class AddIngredient extends javax.swing.JFrame {
         String cateName = StoreItem.category;
         String ItemName = StoreItem.ItemName;
         Double price = StoreItem.ItemPrice;
-        
-        
+
         List<Map<Integer, Integer>> menuIng = new ArrayList<>();
         Map<Integer, Integer> ingredients = new HashMap<>();
         int IngreId = StoreItem.ingreId;
@@ -358,21 +357,18 @@ public class AddIngredient extends javax.swing.JFrame {
         StoreItem.unit = Unit;
 
 //        get ingredient Id
-        String getIngreId = (String) IngreNameCombo.getSelectedItem();
-        String[] nice = getIngreId.split(" - ");
-        if (nice.length >= 1) {
+        String getIngreId = IngreNameCombo.getSelectedItem().toString();
+        String[] splitData = getIngreId.split(" - ");
+        if (splitData.length >= 1) {
             try {
-                int selectedId = Integer.parseInt(nice[0]);
+                int selectedId = Integer.parseInt(splitData[0]);
                 StoreItem.ingreId = selectedId;
                 System.out.println(StoreItem.ingreId);
-
             } catch (NumberFormatException e) {
                 System.out.println("Error");
             }
-
         }
 //        end get ingredient Id
-
 //      Here for display data in list when add 
         if (isExist(name)) {
             JOptionPane.showMessageDialog(this, "this ingredient is already added", "DEplicate Ingredient", JOptionPane.WARNING_MESSAGE);

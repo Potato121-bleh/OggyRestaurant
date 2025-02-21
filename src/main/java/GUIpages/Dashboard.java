@@ -32,7 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
         for (List<Object> row : menuItems) {
             tablemodel.addRow(row.toArray());
         }
-        
+          
     }
     
 

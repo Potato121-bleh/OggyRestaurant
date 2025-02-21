@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +134,7 @@ public class DBAppHandler {
         }
         return resultData;
     }
-    
+
     public List<List<Object>> getIngre() {
         Connection Conn = null;
         List<List<Object>> resultData = new ArrayList<>();
@@ -198,13 +199,9 @@ public class DBAppHandler {
         }
         return resultData;
     }
-    
-    
-    
-    
 
     public boolean add(String categoryName, String itemName, double itemPrice, List<Map<Integer, Integer>> menuIng) {
-                
+
         Connection Conn = null;
         try {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
@@ -214,7 +211,7 @@ public class DBAppHandler {
                     + "(item_name, item_price, item_category) "
                     + "VALUES (?, ?, ?)"
             );
-            
+
             pstmt.setObject(1, itemName);
             pstmt.setObject(2, itemPrice);
             pstmt.setObject(3, categoryName);
@@ -222,7 +219,7 @@ public class DBAppHandler {
             if (affectedRow != 1) {
                 throw new Exception("unexpected behavior from database");
             }
-            
+
             PreparedStatement queryMenuIdPstmt = Conn.prepareStatement("SELECT item_id FROM menu_item WHERE item_name = ?");
             queryMenuIdPstmt.setObject(1, itemName);
             ResultSet queriedMenuId = queryMenuIdPstmt.executeQuery();
@@ -230,40 +227,32 @@ public class DBAppHandler {
             if (queriedMenuId.getInt("item_id") == 0) {
                 throw new Exception("menu failed to insert");
             }
-            
+
             int menuId = queriedMenuId.getInt("item_id");
-            
+
             // Construct the insert values
             String ingStmt = "INSERT INTO recipe_db (menu_item_id, ingredient_id, request_unit) VALUES ";
-            
-//            [ {1=2}, {3=7} ]
 
+//            [ {1=2}, {3=7} ]
 //             Expected value: ( 1, 1, 2 )
-            
             for (Map<Integer, Integer> map : menuIng) {
-              for (Map.Entry<Integer, Integer> mapEntry : map.entrySet()) {
-                String prepStmt = " ( " + menuId + " , " + mapEntry.getKey() + " , " + mapEntry.getValue() + " ) ,"  ;
-                ingStmt += prepStmt;
-              }
+                for (Map.Entry<Integer, Integer> mapEntry : map.entrySet()) {
+                    String prepStmt = " ( " + menuId + " , " + mapEntry.getKey() + " , " + mapEntry.getValue() + " ) ,";
+                    ingStmt += prepStmt;
+                }
             }
-            
-            
-            
+
             String[] ingStmtArr = ingStmt.split(" ");
-            
+
             String[] newIngStmtArr = Arrays.copyOf(ingStmtArr, ingStmtArr.length - 1);
             String newIngStmt = newIngStmtArr.toString();
-            
-            
-            
+
             PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
             boolean executeFlag = pstmtIng.execute();
             if (!executeFlag) {
                 throw new Exception("failed to insert the ingredient");
             }
-            
-            
-            
+
             Conn.commit();
             return true;
         } catch (Exception e) {
