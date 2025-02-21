@@ -229,7 +229,6 @@ public class DBAppHandler {
                 if (queriedMenuId.getInt("item_id") == 0) {
                 throw new Exception("menu failed to insert");
             }
-<<<<<<< HEAD
             
 //                     
 //            while() {
@@ -242,15 +241,6 @@ public class DBAppHandler {
             String ingStmt = "INSERT INTO recipe_db ( menu_item_id , ingredient_id , request_unit ) VALUES";
             
 //            [ {1=2}, {3=7} ]
-=======
-
-            int menuId = queriedMenuId.getInt("item_id");
-
-            // Construct the insert values
-            String ingStmt = "INSERT INTO recipe_db (menu_item_id, ingredient_id, request_unit) VALUES ";
->>>>>>> a422c23f2f25084c75e126d94147eb44450d8644
-
-//            [ {1=2}, {3=7} ]
 //             Expected value: ( 1, 1, 2 )
             for (Map<Integer, Integer> map : menuIng) {
                 for (Map.Entry<Integer, Integer> mapEntry : map.entrySet()) {
@@ -258,7 +248,6 @@ public class DBAppHandler {
                     ingStmt += prepStmt;
                 }
             }
-<<<<<<< HEAD
             
             System.out.println(ingStmt);
             
@@ -277,14 +266,6 @@ public class DBAppHandler {
 //            
 //            System.out.println(newIngStmt);
             
-=======
-
-            String[] ingStmtArr = ingStmt.split(" ");
-
-            String[] newIngStmtArr = Arrays.copyOf(ingStmtArr, ingStmtArr.length - 1);
-            String newIngStmt = newIngStmtArr.toString();
-
->>>>>>> a422c23f2f25084c75e126d94147eb44450d8644
             PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
             boolean executeFlag = pstmtIng.execute();
             if (!executeFlag) {
