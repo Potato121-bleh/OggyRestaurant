@@ -323,7 +323,10 @@ public class AddIngredient extends javax.swing.JFrame {
         String cateName = StoreItem.category;
         String ItemName = StoreItem.ItemName;
         Double price = StoreItem.ItemPrice;
-
+        if(cateName == null && price== 0.00){
+            JOptionPane.showMessageDialog(this, "Must Input Ingredient and quantity ", "Please Input", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         List<Map<Integer, Integer>> menuIng = new ArrayList<>();
         Map<Integer, Integer> ingredients = new HashMap<>();
         int IngreId = StoreItem.ingreId;
@@ -332,6 +335,8 @@ public class AddIngredient extends javax.swing.JFrame {
         menuIng.add(ingredients);
 
         db.add(cateName, ItemName, price, menuIng);
+        Add_New_Item.main(null);
+        this.dispose();
     }//GEN-LAST:event_btn_doneActionPerformed
 
 
@@ -371,9 +376,11 @@ public class AddIngredient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "this ingredient is already added", "DEplicate Ingredient", JOptionPane.WARNING_MESSAGE);
             return;
         }
+       
         String ItemInlist = name + " | Unit: " + qty + "g";
         listModel.addElement(ItemInlist);
         txt_unit.setText("");
+        
 
     }//GEN-LAST:event_btn_addActionPerformed
 //here to check item exist in list or not
