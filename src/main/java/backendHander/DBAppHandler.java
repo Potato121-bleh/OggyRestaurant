@@ -26,13 +26,13 @@ import java.util.Map;
 // Passed data:
 // db.add("user_info", "id", "name", "price")
 public class DBAppHandler {
-//    String connectionString = "jdbc:postgresql://localhost:5432/java_restaurant_project";
-//    String dbUsername = "postgres";
-    String dbPassword = "nice123";
 
-    String connectionString = "jdbc:postgresql://localhost:5432/oggyshop";
+//    String connectionString = "jdbc:postgresql://localhost:5432/oggyshop";
+//    String dbUsername = "postgres";
+//    String dbPassword = "nice123";
+    String connectionString = "jdbc:postgresql://localhost:5432/OggyShop";
     String dbUsername = "postgres";
-//    String dbPassword = "123";
+    String dbPassword = "123";
 
     public boolean validateUserCrediential(String inputUsername, String inputPassword) {
         Connection Conn = null;
@@ -201,6 +201,7 @@ public class DBAppHandler {
     }
 
     public boolean add(String categoryName, String itemName, double itemPrice, List<Map<Integer, Integer>> menuIng) {
+        System.out.println(itemName);
 
         Connection Conn = null;
         try {
@@ -218,28 +219,30 @@ public class DBAppHandler {
             int affectedRow = pstmt.executeUpdate();
             if (affectedRow != 1) {
                 throw new Exception("unexpected behavior from database");
-                
             }
 
             PreparedStatement queryMenuIdPstmt = Conn.prepareStatement("SELECT item_id FROM menu_item WHERE item_name = ?");
-            queryMenuIdPstmt.setObject(1, itemName);
+//                        PreparedStatement queryMenuIdPstmt = Conn.prepareStatement("SELECT item_id FROM menu_item");
+            queryMenuIdPstmt.setString(1, itemName);
             ResultSet queriedMenuId = queryMenuIdPstmt.executeQuery();
-            int menuId = 0;   
-            while(queriedMenuId.next()){
+            int menuId = 0;
+//            System.out.println(queriedMenuId.getInt("item_id"));
+            while (queriedMenuId.next()) {
+                System.out.println(queriedMenuId.getInt("item_id"));
+
                 if (queriedMenuId.getInt("item_id") == 0) {
-                throw new Exception("menu failed to insert");
-            }
-            
+                    throw new Exception("menu failed to insert");
+                }
+
 //                     
 //            while() {
                 menuId = queriedMenuId.getInt("item_id");
 //            };
             }
-            
-                        
+
             // Construct the insert values
             String ingStmt = "INSERT INTO recipe_db ( menu_item_id , ingredient_id , request_unit ) VALUES";
-            
+
 //            [ {1=2}, {3=7} ]
 //             Expected value: ( 1, 1, 2 )
             for (Map<Integer, Integer> map : menuIng) {
@@ -248,30 +251,29 @@ public class DBAppHandler {
                     ingStmt += prepStmt;
                 }
             }
-            
+
             System.out.println(ingStmt);
-            
+
             String[] ingStmtArr = ingStmt.split(" ");
             System.out.println(Arrays.toString(ingStmtArr));
-            
+
             String[] newIngStmtArr = Arrays.copyOf(ingStmtArr, ingStmtArr.length - 1);
             String newIngStmt = String.join(" ", newIngStmtArr);
-            
+
             System.out.println(Arrays.toString(newIngStmtArr));
-            
-//            System.out.println("New ing stmt: ");
-            System.out.println(newIngStmt.toString());
-//            newIngStmt = newIngStmt.replace("[", "");S
+
+//          System.out.println("New ing stmt: ");
+            System.out.println(newIngStmt);
+//            newIngStmt = newIngStmt.replace("[", "");
 //            newIngStmt = newIngStmt.replace("]", "");
 //            
 //            System.out.println(newIngStmt);
-            
-            PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
-            boolean executeFlag = pstmtIng.execute();
-            if (!executeFlag) {
-                throw new Exception("failed to insert the ingredient");
-            }
 
+            PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
+            int executeRecipeFlag = pstmtIng.executeUpdate();
+            if (executeRecipeFlag != 1) {
+                throw new Exception("unexpected behavior from database");
+            }
             Conn.commit();
             return true;
         } catch (Exception e) {
@@ -465,6 +467,7 @@ public class DBAppHandler {
         }
         return true;
     }
+    
 
     private void While(boolean next) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

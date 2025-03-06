@@ -365,7 +365,7 @@ public class AddIngredient extends javax.swing.JFrame {
                 System.out.println("Error");
             }
         }
-//        end get ingredient Id
+//      end get ingredient Id
 //      Here for display data in list when add 
         if (isExist(name)) {
             JOptionPane.showMessageDialog(this, "this ingredient is already added", "DEplicate Ingredient", JOptionPane.WARNING_MESSAGE);
