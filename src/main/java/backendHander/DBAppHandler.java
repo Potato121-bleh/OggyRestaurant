@@ -271,7 +271,7 @@ public class DBAppHandler {
 
             PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
             int executeRecipeFlag = pstmtIng.executeUpdate();
-            if (executeRecipeFlag != 1) {
+            if (executeRecipeFlag != menuIng.size() ) {
                 throw new Exception("unexpected behavior from database");
             }
             Conn.commit();
