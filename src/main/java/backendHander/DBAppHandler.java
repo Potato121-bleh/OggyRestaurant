@@ -271,7 +271,7 @@ public class DBAppHandler {
 
             PreparedStatement pstmtIng = Conn.prepareStatement(newIngStmt);
             int executeRecipeFlag = pstmtIng.executeUpdate();
-            if (executeRecipeFlag != menuIng.size() ) {
+            if (executeRecipeFlag != menuIng.size()) {
                 throw new Exception("unexpected behavior from database");
             }
             Conn.commit();
@@ -432,6 +432,13 @@ public class DBAppHandler {
         try {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
             Conn.setAutoCommit(false);
+
+            //delete recipe
+            PreparedStatement pstmRe = Conn.prepareStatement("DELETE FROM recipe_db WHERE menu_item_id = ?");
+            pstmRe.setObject(1, itemId);
+            pstmRe.executeUpdate();
+
+            ////delete menu_items
             PreparedStatement pstmt = Conn.prepareStatement("DELETE FROM menu_item WHERE item_id = ?");
             pstmt.setObject(1, itemId);
             int deleteAffectedRow = pstmt.executeUpdate();
@@ -467,7 +474,6 @@ public class DBAppHandler {
         }
         return true;
     }
-    
 
     private void While(boolean next) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
