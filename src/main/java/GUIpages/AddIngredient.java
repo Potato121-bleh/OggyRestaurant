@@ -6,7 +6,6 @@ package GUIpages;
 
 import backendHander.DBAppHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
@@ -323,15 +322,41 @@ public class AddIngredient extends javax.swing.JFrame {
         String cateName = StoreItem.category;
         String ItemName = StoreItem.ItemName;
         Double price = StoreItem.ItemPrice;
+//=========================old =============================
+//        List<Map<Integer, Integer>> menuIng = new ArrayList<>();
+//        Map<Integer, Integer> ingredients = new HashMap<>();
+//        int IngreId = StoreItem.ingreId;
+//        int unit = StoreItem.unit;
+//        if (IngreId == 0 || unit == 0) {
+//            JOptionPane.showMessageDialog(this, "Must add at least one ingredient with a valid quantity!", "Input Error", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
+//        ingredients.put(IngreId, unit);
+//        menuIng.add(ingredients);
+//
+//        if (cateName == null || cateName.trim().isEmpty() || ItemName == null || ItemName.trim().isEmpty() || Double.compare(price, 0.00) == 0) {
+//            JOptionPane.showMessageDialog(this, "Must Input Ingredient and quantity", "Please Input", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
 
-        List<Map<Integer, Integer>> menuIng = new ArrayList<>();
-        Map<Integer, Integer> ingredients = new HashMap<>();
-        int IngreId = StoreItem.ingreId;
-        int unit = StoreItem.unit;
-        ingredients.put(IngreId, unit);
-        menuIng.add(ingredients);
+//=======================  end old==================================================
 
-        db.add(cateName, ItemName, price, menuIng);
+        ArrayList<Map<Integer, Integer>> menuIngg = StoreItem.getIngredients();
+        if (StoreItem.getIngredients().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Must add at least one ingredient with a valid quantity!", "Input Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (cateName == null || cateName.trim().isEmpty() || ItemName == null || ItemName.trim().isEmpty() || Double.compare(price, 0.00) == 0) {
+            JOptionPane.showMessageDialog(this, "Must Input Ingredient and quantity", "Please Input", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        db.add(cateName, ItemName, price, menuIngg);
+        StoreItem.clearIngredients();
+
+//        new Dashboard().setVisible(true);
+        Dashboard.main(null);
+
+        this.dispose();
     }//GEN-LAST:event_btn_doneActionPerformed
 
 
@@ -351,29 +376,32 @@ public class AddIngredient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ingredient must less then 1000g", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        StoreItem.unit = Unit;
+        if (isExist(name)) {
+            JOptionPane.showMessageDialog(this, "this ingredient is already added", "Duplicate Ingredient", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
+//        StoreItem.unit = Unit;
 //        get ingredient Id
         String getIngreId = IngreNameCombo.getSelectedItem().toString();
         String[] splitData = getIngreId.split(" - ");
         if (splitData.length >= 1) {
             try {
                 int selectedId = Integer.parseInt(splitData[0]);
-                StoreItem.ingreId = selectedId;
-                System.out.println(StoreItem.ingreId);
+//                StoreItem.ingreId = selectedId;
+                StoreItem.addIngredient(selectedId, Unit);
+//                System.out.println(StoreItem.ingreId);
             } catch (NumberFormatException e) {
                 System.out.println("Error");
             }
         }
-//        end get ingredient Id
+//      end get ingredient Id
 //      Here for display data in list when add 
-        if (isExist(name)) {
-            JOptionPane.showMessageDialog(this, "this ingredient is already added", "DEplicate Ingredient", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+
         String ItemInlist = name + " | Unit: " + qty + "g";
         listModel.addElement(ItemInlist);
         txt_unit.setText("");
+
 
     }//GEN-LAST:event_btn_addActionPerformed
 //here to check item exist in list or not
@@ -383,6 +411,7 @@ public class AddIngredient extends javax.swing.JFrame {
             if (listModel.get(i).contains(Selected)) {
                 return true;
             }
+
         }
         return false;
     }

@@ -22,7 +22,7 @@ public class Dashboard extends javax.swing.JFrame {
         initComponents();
         GetMenu();
     }
-
+    
     private void GetMenu() {
         String[] clms = {"Item_Id", "Item_name", "Item_Price", "Item_Category"};
         DefaultTableModel tablemodel = new DefaultTableModel(clms, 0);
@@ -31,11 +31,9 @@ public class Dashboard extends javax.swing.JFrame {
         List<List<Object>> menuItems = dbhandler.getMenuItem();
         for (List<Object> row : menuItems) {
             tablemodel.addRow(row.toArray());
-        }
-          
-    }
+        }         
+    }  
     
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
