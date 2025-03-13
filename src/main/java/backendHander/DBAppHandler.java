@@ -437,6 +437,8 @@ public class DBAppHandler {
             PreparedStatement pstmRe = Conn.prepareStatement("DELETE FROM recipe_db WHERE menu_item_id = ?");
             pstmRe.setObject(1, itemId);
             pstmRe.executeUpdate();
+            
+            ///end delete recipe
 
             ////delete menu_items
             PreparedStatement pstmt = Conn.prepareStatement("DELETE FROM menu_item WHERE item_id = ?");

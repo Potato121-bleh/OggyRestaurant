@@ -11,6 +11,7 @@ import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  *
@@ -340,7 +341,6 @@ public class AddIngredient extends javax.swing.JFrame {
 //        }
 
 //=======================  end old==================================================
-
         ArrayList<Map<Integer, Integer>> menuIngg = StoreItem.getIngredients();
         if (StoreItem.getIngredients().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Must add at least one ingredient with a valid quantity!", "Input Error", JOptionPane.WARNING_MESSAGE);
@@ -381,21 +381,52 @@ public class AddIngredient extends javax.swing.JFrame {
             return;
         }
 
-//        StoreItem.unit = Unit;
-//        get ingredient Id
-        String getIngreId = IngreNameCombo.getSelectedItem().toString();
-        String[] splitData = getIngreId.split(" - ");
-        if (splitData.length >= 1) {
-            try {
-                int selectedId = Integer.parseInt(splitData[0]);
+//        int cfAddIngre = JOptionPane.showConfirmDialog(this, "Are you sure you want to add " + name + " with qty " + Unit + "g to menu " + StoreItem.ItemName,
+//                
+//                "Note: You cannnot remove when you aleady added!!!",
+//      
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE);
+
+        String[] parts = name.split(" - ", 2);
+        String onlyName = (parts.length > 1) ? parts[1] : parts[0];
+        
+        JLabel message = new JLabel("<html>Are you sure you want to add "
+                + onlyName + " with qty " + Unit + "g to menu " + StoreItem.ItemName
+                + "<font color='red'><br>Note: You cannot remove it once you added!</font></html>");
+        int cfAddIngre = JOptionPane.showConfirmDialog(
+                null, message, "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (cfAddIngre == JOptionPane.YES_OPTION) {
+            String getIngreId = IngreNameCombo.getSelectedItem().toString();
+            String[] splitData = getIngreId.split(" - ");
+            if (splitData.length >= 1) {
+                try {
+                    int selectedId = Integer.parseInt(splitData[0]);
 //                StoreItem.ingreId = selectedId;
-                StoreItem.addIngredient(selectedId, Unit);
+                    StoreItem.addIngredient(selectedId, Unit);
 //                System.out.println(StoreItem.ingreId);
-            } catch (NumberFormatException e) {
-                System.out.println("Error");
+                } catch (NumberFormatException e) {
+                    System.out.println("Error");
+                }
             }
         }
-//      end get ingredient Id
+
+//        StoreItem.unit = Unit;
+//        get ingredient Id
+//        String getIngreId = IngreNameCombo.getSelectedItem().toString();
+//        String[] splitData = getIngreId.split(" - ");
+//        if (splitData.length >= 1) {
+//            try {
+//                int selectedId = Integer.parseInt(splitData[0]);
+////                StoreItem.ingreId = selectedId;
+//                StoreItem.addIngredient(selectedId, Unit);
+////                System.out.println(StoreItem.ingreId);
+//            } catch (NumberFormatException e) {
+//                System.out.println("Error");
+//            }
+//        }
+////      end get ingredient Id
 //      Here for display data in list when add 
 
         String ItemInlist = name + " | Unit: " + qty + "g";
