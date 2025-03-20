@@ -448,6 +448,7 @@ public class DBAppHandler {
                 Map<Integer, Integer> selectedMenu = menuId.get(i);          // { menuId: 1, quantity: 2 }  | key: value 
                 List<Map<Integer, Integer>> recipeList = new ArrayList<Map<Integer, Integer>>();
                 List<Map<Integer, Integer>> originIngredientList = new ArrayList<Map<Integer, Integer>>();
+                System.out.println(menuId.get(i));
                 
                 // get selectedMenu ingredient
                 

@@ -149,6 +149,7 @@ public class Order_menu {
         for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {
             String itemName = entry.getKey();
             int quantity = entry.getValue();
+            
 //            double price = itemPrices.get(itemName) * quantity;
 //        String formattedPrice = String.format("%.2f", price);
 
@@ -206,6 +207,8 @@ public class Order_menu {
             System.out.println(quantity);
 
             Map<Integer, Integer> orderItem = new HashMap<>();
+//            orderItem.put("menuId",menuId);
+//            orderItem.put("quantity", quantity);
             orderItem.put(menuId, quantity);
             orderList.add(orderItem);
         }
