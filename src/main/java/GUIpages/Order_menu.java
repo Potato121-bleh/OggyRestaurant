@@ -24,7 +24,8 @@ public class Order_menu {
     public Order_menu() {
         frame = new JFrame("Oggy Restaurant");
         frame.setSize(700, 600);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new GridLayout(1, 2));
@@ -42,7 +43,6 @@ public class Order_menu {
         JLabel Title = new JLabel("️ Menu", SwingConstants.CENTER);
         Title.setFont(new Font("Arial", Font.BOLD, 20)); //font
         Title.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0)); // Add spacing
-
         ///row , col 
         menuPanel = new JPanel(new GridLayout(0, 1, 10, 10));
         JScrollPane menuScrollPane = new JScrollPane(menuPanel);
@@ -67,7 +67,7 @@ public class Order_menu {
         JButton checkoutButton = new JButton("Checkout");
         checkoutButton.addActionListener(e -> checkout());
         checkoutButton.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-        
+
         JLabel cartLabel = new JLabel("🛒 Your Cart", SwingConstants.CENTER);
         cartLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
@@ -87,6 +87,15 @@ public class Order_menu {
         DisplayItemNameComboBox();
         loadMenuItems();
         frame.setVisible(true);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+//                Login login = new Login();
+                ManageRes manage = new ManageRes();
+                frame.dispose();
+                manage.setVisible(true);
+            }
+        });
     }
 
     private void loadMenuItems() {
@@ -149,16 +158,15 @@ public class Order_menu {
         for (Map.Entry<String, Integer> entry : cartItems.entrySet()) {
             String itemName = entry.getKey();
             int quantity = entry.getValue();
-            
+
 //            double price = itemPrices.get(itemName) * quantity;
 //        String formattedPrice = String.format("%.2f", price);
-
             BigDecimal price = BigDecimal.valueOf(itemPrices.get(itemName))
                     .multiply(BigDecimal.valueOf(quantity))
                     .setScale(2, RoundingMode.HALF_UP);
 
             JPanel cartItemPanel = new JPanel(new BorderLayout());
-            cartItemPanel.setMaximumSize(new Dimension(300, 40));
+            cartItemPanel.setMaximumSize(new Dimension(500, 40));
             JLabel cartItemLabel = new JLabel(itemName + " x" + quantity + " - $" + price);
             JButton removeButton = new JButton("Remove");
 
@@ -189,11 +197,11 @@ public class Order_menu {
 
 //        int tableId = 1;
         String selected = (String) comboBox.getSelectedItem();
-        if(selected == null || selected.isEmpty()){
-            JOptionPane.showMessageDialog(frame,"Please Choose table before checkout!!", "Table not selected", JOptionPane.WARNING_MESSAGE);
+        if (selected == null || selected.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "Please Choose table before checkout!!", "Table not selected", JOptionPane.WARNING_MESSAGE);
         }
         String[] id_name = selected.split(" - ");
-        int tableId = Integer.parseInt(id_name[0]);   
+        int tableId = Integer.parseInt(id_name[0]);
         String tableName = id_name[1];
         System.out.println(tableId + tableName);
 

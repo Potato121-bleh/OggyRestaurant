@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -42,8 +42,111 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="AddIngredient_jPanel1"/>
+      </AuxValues>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                  <Component id="btn_back1" min="-2" pref="82" max="-2" attributes="0"/>
+                  <EmptySpace min="153" pref="153" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="176" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="83" pref="83" max="-2" attributes="0"/>
+                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="139" pref="139" max="-2" attributes="0"/>
+                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="IngreNameCombo" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Component id="lbName" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="49" pref="49" max="-2" attributes="0"/>
+                          <Component id="lbPrice" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                          <Component id="lbCate" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="76" pref="76" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txt_unit" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
+                          <Component id="btn_add" min="-2" pref="86" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="92" pref="92" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="195" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
+                  <EmptySpace min="581" pref="581" max="-2" attributes="0"/>
+                  <Component id="btn_done" min="-2" pref="92" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btn_back1" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" pref="49" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="27" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="IngreNameCombo" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace min="103" pref="103" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbName" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbPrice" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbCate" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="txt_unit" min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                          <Component id="btn_add" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" min="-2" pref="368" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+                  <Component id="btn_done" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
       <SubComponents>
         <Component class="javax.swing.JButton" name="btn_back1">
           <Properties>
@@ -69,11 +172,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_back1ActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="0" gridWidth="4" gridHeight="1" fill="0" ipadX="47" ipadY="9" insetsTop="15" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -82,11 +180,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Add Ingredient"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="9" gridY="0" gridWidth="3" gridHeight="2" fill="0" ipadX="7" ipadY="17" insetsTop="15" insetsLeft="64" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -95,11 +188,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Select Ingredient to add"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="2" gridWidth="9" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="18" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -108,11 +196,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Input required Unit"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="9" gridY="2" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="18" insetsLeft="83" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JComboBox" name="IngreNameCombo">
           <Properties>
@@ -131,21 +214,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="3" gridWidth="8" gridHeight="1" fill="0" ipadX="75" ipadY="19" insetsTop="27" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_unit">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_unitActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="9" gridY="3" gridWidth="4" gridHeight="1" fill="0" ipadX="136" ipadY="19" insetsTop="27" insetsLeft="52" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -154,21 +227,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Add Ingredient"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="13" gridY="2" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="18" insetsLeft="106" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="13" gridY="3" gridWidth="3" gridHeight="6" fill="1" ipadX="147" ipadY="222" insetsTop="27" insetsLeft="92" insetsBottom="0" insetsRight="0" anchor="18" weightX="1.0" weightY="1.0"/>
-            </Constraint>
-          </Constraints>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
@@ -214,11 +277,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_doneActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="13" gridY="9" gridWidth="2" gridHeight="1" fill="0" ipadX="53" ipadY="9" insetsTop="18" insetsLeft="134" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btn_add">
           <Properties>
@@ -244,71 +302,36 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="9" gridY="4" gridWidth="1" gridHeight="1" fill="0" ipadX="55" ipadY="9" insetsTop="18" insetsLeft="107" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Menu Name :  "/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="5" gridWidth="3" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="50" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Price : "/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="6" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
             <Property name="text" type="java.lang.String" value="Category :"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="7" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="24" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbName">
           <Properties>
             <Property name="text" type="java.lang.String" value="hi"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="4" gridY="5" gridWidth="1" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="50" insetsLeft="1" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbPrice">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel8"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="4" gridY="6" gridWidth="3" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="1" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="lbCate">
           <Properties>
             <Property name="text" type="java.lang.String" value="10"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="4" gridY="7" gridWidth="2" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="12" insetsLeft="1" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="0.0"/>
-            </Constraint>
-          </Constraints>
         </Component>
       </SubComponents>
     </Container>

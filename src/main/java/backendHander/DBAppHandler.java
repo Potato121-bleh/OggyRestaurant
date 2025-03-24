@@ -134,7 +134,8 @@ public class DBAppHandler {
         }
         return resultData;
     }
-     public List<List<Object>> getTable() {
+
+    public List<List<Object>> getTable() {
         Connection Conn = null;
         List<List<Object>> resultData = new ArrayList<>();
         try {
@@ -397,9 +398,8 @@ public class DBAppHandler {
             PreparedStatement pstmRe = Conn.prepareStatement("DELETE FROM recipe_db WHERE menu_item_id = ?");
             pstmRe.setObject(1, itemId);
             pstmRe.executeUpdate();
-            
-            ///end delete recipe
 
+            ///end delete recipe
             ////delete menu_items
             PreparedStatement pstmt = Conn.prepareStatement("DELETE FROM menu_item WHERE item_id = ?");
             pstmt.setObject(1, itemId);
@@ -436,88 +436,114 @@ public class DBAppHandler {
         }
         return true;
     }
+
     // original
-        public boolean executeTransaction(int tbId, List<Map<Integer, Integer>> menuId) {
+    public boolean executeTransaction(int tbId, List<Map<Integer, Integer>> menuId) {
         Connection Conn = null;
         try {
             Conn = DriverManager.getConnection(connectionString, dbUsername, dbPassword);
             Conn.setAutoCommit(false);
-            
+            System.out.println("Phrase 1");
             // The operation started work on individual menu
-            for(int i = 0; i < menuId.size(); i++) {
+            for (int i = 0; i < menuId.size(); i++) {
+
                 Map<Integer, Integer> selectedMenu = menuId.get(i);          // { menuId: 1, quantity: 2 }  | key: value 
+                Map.Entry<Integer, Integer> selectedMenuEntry = selectedMenu.entrySet().iterator().next();
                 List<Map<Integer, Integer>> recipeList = new ArrayList<Map<Integer, Integer>>();
                 List<Map<Integer, Integer>> originIngredientList = new ArrayList<Map<Integer, Integer>>();
                 System.out.println(menuId.get(i));
-                
+                System.out.println("Phrase 2");
                 // get selectedMenu ingredient
-                
+//                menuId.get(menuMapIndex).entrySet().iterator().next();
+                System.out.println(selectedMenuEntry.getKey());   /// null
                 PreparedStatement PRecipeStmt = Conn.prepareStatement("SELECT * FROM recipe_db WHERE menu_item_id = ?");
-                PRecipeStmt.setObject(1, selectedMenu.get("menuId"));
+                PRecipeStmt.setObject(1, selectedMenuEntry.getKey());
                 ResultSet queriedRecipeRow = PRecipeStmt.executeQuery();
-                
+                System.out.println("Phrase 3");
+
+//                Map<Integer, Integer> selectedMenu = menuId.get(i);          // { menuId: 1, quantity: 2 }  | key: value 
+//                List<Map<Integer, Integer>> recipeList = new ArrayList<Map<Integer, Integer>>();
+//                List<Map<Integer, Integer>> originIngredientList = new ArrayList<Map<Integer, Integer>>();
+//                System.out.println(menuId.get(i));
+//                        System.out.println("Phrase 2");
+//                // get selectedMenu ingredient
+//                System.out.println(selectedMenu.get("menuId"));   /// null
+//                PreparedStatement PRecipeStmt = Conn.prepareStatement("SELECT * FROM recipe_db WHERE menu_item_id = ?");
+//                PRecipeStmt.setObject(1, selectedMenu.get("menuId"));
+//                ResultSet queriedRecipeRow = PRecipeStmt.executeQuery();
+//                        System.out.println("Phrase 3");
                 // create table recipe_db(
                 // recipe_id Serial primary key, 
                 // menu_item_id int references menu_item(item_id), 
                 // ingredient_id int references ingredient_db(ingredient_id), 
                 // request_unit int 
                 // )
-                
                 while (queriedRecipeRow.next()) {
 //                    recipeList.add(selectedMenu)
+
+                    System.out.println("run loop");
                     Map<Integer, Integer> prepRecipe = new HashMap();
                     prepRecipe.put(
-                            queriedRecipeRow.getInt("ingredient_id"), 
+                            queriedRecipeRow.getInt("ingredient_id"),
                             queriedRecipeRow.getInt("request_unit")
                     );
 //                    queriedRecipeRow.getInt("ingredient_id");
 //                    queriedRecipeRow.getInt("request_unit");
                     recipeList.add(prepRecipe);
                 }
-                
+                System.out.println("Phrase 4");
                 // as now as we got the all required ingredient for our menu
                 // we can retrieve the all required ingredient from original stock
                 String queryIngredientStmt = "SELECT * FROM ingredient_db WHERE ingredient_id IN (";
+                System.out.println(recipeList.size());
                 for (int j = 0; j < recipeList.size(); j++) {
+
                     Map.Entry<Integer, Integer> entry = recipeList.get(j).entrySet().iterator().next();
                     queryIngredientStmt += " " + entry.getKey() + " ,";
                 }
+                System.out.println("Phrase zin");
                 // SELECT * FROM ingredient_db WHERE ingredient_id IN (1, 5, 2, 6, 10)
                 String cleanedQueriedIngStmt = queryIngredientStmt.substring(0, queryIngredientStmt.length() - 1);
+
                 cleanedQueriedIngStmt += ")";
+
+                System.out.println(cleanedQueriedIngStmt);
+
                 PreparedStatement PIngreStmt = Conn.prepareStatement(cleanedQueriedIngStmt);
-                ResultSet queriedOriginIngredient = PIngreStmt.executeQuery();
-                while (queriedOriginIngredient.next()) {
+                ResultSet queriedOriginIngredientRow = PIngreStmt.executeQuery();
+                System.out.println("Phrase 5");
+                while (queriedOriginIngredientRow.next()) {
+                    System.out.println("loop end");
                     Map<Integer, Integer> prepOriginIngredient = new HashMap();
                     prepOriginIngredient.put(
-                            queriedRecipeRow.getInt("ingredient_id"), 
-                            queriedRecipeRow.getInt("total_unit")
+                            queriedOriginIngredientRow.getInt("ingredient_id"),
+                            queriedOriginIngredientRow.getInt("total_unit")
                     );
                     originIngredientList.add(prepOriginIngredient);
                 }
-                
+                System.out.println(originIngredientList.toString());
+
                 //create table ingredient_db(
                 // ingredient_id Serial primary key, 
                 // name varchar(100), 
                 // total_unit int
                 // )
-                
-                
                 // As we got data from both side we can start to do validation to confirm the purchase
                 // before we start we have to make sure from all side they must have the same length of list
 //                List<Map<Integer, Integer>> recipeList = new ArrayList<Map<Integer, Integer>>();
 //                List<Map<Integer, Integer>> originIngredientList = new ArrayList<Map<Integer, Integer>>();
-                if(recipeList.size() != originIngredientList.size()) {
+System.out.println("Phrase 6");
+                if (recipeList.size() != originIngredientList.size()) {
                     throw new Exception("RecipeList & OriginIngredientList size does not match");
                 }
-                
-                for(int recipeIndex = 0; recipeIndex < recipeList.size(); recipeIndex++) {
+
+                for (int recipeIndex = 0; recipeIndex < recipeList.size(); recipeIndex++) {
                     Map.Entry<Integer, Integer> cleanRecipeEle = recipeList.get(recipeIndex).entrySet().iterator().next();
-                    for(int originIndex = 0; originIndex < originIngredientList.size(); originIndex++) {
+                    for (int originIndex = 0; originIndex < originIngredientList.size(); originIndex++) {
                         Map.Entry<Integer, Integer> cleanOriginIngEle = originIngredientList.get(originIndex).entrySet().iterator().next();
 
-                        if(cleanRecipeEle.getKey() == cleanOriginIngEle.getKey()) {
-                            int totalRequiredUnit = cleanRecipeEle.getValue() * selectedMenu.get("quantity");
+                        if (cleanRecipeEle.getKey() == cleanOriginIngEle.getKey()) {
+                            int totalRequiredUnit = cleanRecipeEle.getValue() * selectedMenuEntry.getValue();
                             if (totalRequiredUnit > cleanOriginIngEle.getValue()) {
                                 throw new Exception("Not Enough Stock: Due to Ingredient id " + cleanRecipeEle.getKey());
                             }
@@ -529,37 +555,36 @@ public class DBAppHandler {
                     }
                 }
                 // { menuId: 1, Quantity: 10}
-                
+
                 // SQL STATEMENT BUILDING PROCESS
                 // As the ingredient is done, we have to update all of them to table
                 String updateCalculatedIng = "UPDATE ingredient_db SET total_unit = CASE ";
                 String dynamicIngId = "";
                 // we have to dynamically build the update stmt
-                for(int originIndex = 0; originIndex < originIngredientList.size(); originIndex++) {
+                for (int originIndex = 0; originIndex < originIngredientList.size(); originIndex++) {
                     Map.Entry<Integer, Integer> cleanOriginIngEle = originIngredientList.get(originIndex).entrySet().iterator().next();
                     updateCalculatedIng += " WHEN ingredient_id = " + cleanOriginIngEle.getKey() + " THEN " + cleanOriginIngEle.getValue();
                     dynamicIngId += " " + cleanOriginIngEle.getKey() + " ,";
                 }
-                
+
                 // clean up the string as we done built it
-                dynamicIngId.substring(0, dynamicIngId.length() - 1);
-                updateCalculatedIng += " END WHERE ingredient_id IN ( " + dynamicIngId + " );";
-                
-                
+                String cleanDynamicId  = dynamicIngId.substring(0, dynamicIngId.length() - 1);
+                updateCalculatedIng += " END WHERE ingredient_id IN ( " + cleanDynamicId + " );";
+                              System.out.println(updateCalculatedIng);
+
                 PreparedStatement PUpdateIng = Conn.prepareStatement(updateCalculatedIng);
                 int affectedRow = PUpdateIng.executeUpdate();
                 if (affectedRow != originIngredientList.size()) {
                     throw new Exception("Unexpected Row Affected from database: Due to row affected not equal to size of origin arrayList");
                 }
-                
-                
+  
+
                 // CREATE TABLE order_transaction (
                 // transaction_id SERIAL PRIMARY KEY,
                 // table_id INT REFERENCES rstTable(table_id) ON DELETE CASCADE,
                 // item_id INT REFERENCES menu_item(item_id) ON DELETE CASCADE,
                 // qty INT 
                 // );
-                
                 //  UPDATE your_table
 //                  SET column_name = CASE 
 //                  WHEN id = 1 THEN 1
@@ -569,35 +594,35 @@ public class DBAppHandler {
 //                  -- Add more cases here
 //                  END
 //                  WHERE id IN (1, 2, 3, 50); -- List only the IDs that are being updated
-
 //                  COMMIT;  
             }
-            
+
             // As the validation & calculation of ingredient stock is done, 
             // we can working on insert new transaction into transaction table
-            
             String PrepInsertTransactionStmt = "INSERT INTO order_transaction (table_id, item_id, qty) VALUES ";
-            for(int menuMapIndex = 0; menuMapIndex < menuId.size(); menuMapIndex++) {
+            for (int menuMapIndex = 0; menuMapIndex < menuId.size(); menuMapIndex++) {
                 PrepInsertTransactionStmt += " ( ";
                 Map.Entry<Integer, Integer> selectedMapEntry = menuId.get(menuMapIndex).entrySet().iterator().next();
-                PrepInsertTransactionStmt += "tbId, " + selectedMapEntry.getKey() + ", " + selectedMapEntry.getValue();
+                PrepInsertTransactionStmt += tbId + ", "+ selectedMapEntry.getKey() + ", " + selectedMapEntry.getValue();
                 PrepInsertTransactionStmt += " ) ,";
             }
-            
-            String cleanedPrepTransactionStmt = PrepInsertTransactionStmt.substring(0, PrepInsertTransactionStmt.length() - 1);
+
+            String cleanedPrepTransactionStmt = PrepInsertTransactionStmt.substring(0, PrepInsertTransactionStmt.length() - 1);  
+            System.out.println(cleanedPrepTransactionStmt);
             PreparedStatement PInsertTransactionStmt = Conn.prepareStatement(cleanedPrepTransactionStmt);
             int InsertTxAffectedRow = PInsertTransactionStmt.executeUpdate();
-            if (InsertTxAffectedRow != menuId.size()){
+            if (InsertTxAffectedRow != menuId.size()) {
                 throw new Exception("Unexpected Row affected from inserting transaction");
             }
-            
+
+            System.out.println(cleanedPrepTransactionStmt);
+
             // AS everything has updated successfully done.
             // We can commit our transaction.
             Conn.commit();
             Conn.setAutoCommit(true);
-        }
-        catch (Exception e) {
-        try {
+        } catch (Exception e) {
+            try {
                 if (Conn != null) {
                     Conn.rollback();
                 }
@@ -609,6 +634,7 @@ public class DBAppHandler {
             System.out.println(e);
             System.out.println("!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!");
             System.out.println("failed to perform Delete transasction");
+            return false;
         } finally {
             try {
                 if (Conn != null) {
@@ -618,15 +644,13 @@ public class DBAppHandler {
                 System.out.println(e);
                 System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 System.out.println("Something went wrong, Could be closing connection failed");
+                return false;
             }
 
         }
         return true;
     }
 
-        
-        
-        
     // test method
 //    public boolean executeTransaction(int tbId, List<Map<Integer, Integer>> menuId) {
 //        Connection Conn = null;
@@ -791,7 +815,6 @@ public class DBAppHandler {
 //        }
 //        return true;
 //    }
-
     private void While(boolean next) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

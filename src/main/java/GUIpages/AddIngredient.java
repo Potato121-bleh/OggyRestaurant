@@ -30,6 +30,7 @@ public class AddIngredient extends javax.swing.JFrame {
         String price = StoreItem.ItemPrice + "";
         lbPrice.setText(price);
         lbCate.setText(StoreItem.category);
+        this.setLocationRelativeTo(null);
 
     }
     private DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -42,7 +43,6 @@ public class AddIngredient extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         btn_back1 = new javax.swing.JButton();
@@ -65,8 +65,6 @@ public class AddIngredient extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
         btn_back1.setBackground(new java.awt.Color(204, 204, 204));
         btn_back1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_back1.setText("Back");
@@ -77,48 +75,15 @@ public class AddIngredient extends javax.swing.JFrame {
                 btn_back1ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 47;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 24, 0, 0);
-        jPanel1.add(btn_back1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
         jLabel2.setText("Add Ingredient");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 7;
-        gridBagConstraints.ipady = 17;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(15, 64, 0, 0);
-        jPanel1.add(jLabel2, gridBagConstraints);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel4.setText("Select Ingredient to add");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 24, 0, 0);
-        jPanel1.add(jLabel4, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setText("Input required Unit");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 83, 0, 0);
-        jPanel1.add(jLabel5, gridBagConstraints);
 
         IngreNameCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         IngreNameCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -126,39 +91,15 @@ public class AddIngredient extends javax.swing.JFrame {
                 IngreNameComboActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.ipadx = 75;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 24, 0, 0);
-        jPanel1.add(IngreNameCombo, gridBagConstraints);
 
         txt_unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_unitActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 136;
-        gridBagConstraints.ipady = 19;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 52, 0, 0);
-        jPanel1.add(txt_unit, gridBagConstraints);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setText("Add Ingredient");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 106, 0, 0);
-        jPanel1.add(jLabel6, gridBagConstraints);
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -166,20 +107,6 @@ public class AddIngredient extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 147;
-        gridBagConstraints.ipady = 222;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(27, 92, 0, 0);
-        jPanel1.add(jScrollPane1, gridBagConstraints);
 
         btn_done.setBackground(new java.awt.Color(204, 204, 204));
         btn_done.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -191,15 +118,6 @@ public class AddIngredient extends javax.swing.JFrame {
                 btn_doneActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 13;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 53;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 134, 0, 0);
-        jPanel1.add(btn_done, gridBagConstraints);
 
         btn_add.setBackground(new java.awt.Color(204, 204, 204));
         btn_add.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -211,66 +129,99 @@ public class AddIngredient extends javax.swing.JFrame {
                 btn_addActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.ipadx = 55;
-        gridBagConstraints.ipady = 9;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 107, 0, 0);
-        jPanel1.add(btn_add, gridBagConstraints);
 
         jLabel1.setText("Menu Name :  ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(50, 24, 0, 0);
-        jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel3.setText("Price : ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 24, 0, 0);
-        jPanel1.add(jLabel3, gridBagConstraints);
 
         jLabel7.setText("Category :");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 24, 0, 0);
-        jPanel1.add(jLabel7, gridBagConstraints);
 
         lbName.setText("hi");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(50, 1, 0, 0);
-        jPanel1.add(lbName, gridBagConstraints);
 
         lbPrice.setText("jLabel8");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
-        jPanel1.add(lbPrice, gridBagConstraints);
 
         lbCate.setText("10");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 1, 0, 0);
-        jPanel1.add(lbCate, gridBagConstraints);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(btn_back1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel4)
+                .addGap(83, 83, 83)
+                .addComponent(jLabel5)
+                .addGap(139, 139, 139)
+                .addComponent(jLabel6))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(IngreNameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(6, 6, 6)
+                        .addComponent(lbName))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(49, 49, 49)
+                        .addComponent(lbPrice))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(29, 29, 29)
+                        .addComponent(lbCate)))
+                .addGap(76, 76, 76)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(92, 92, 92)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(581, 581, 581)
+                .addComponent(btn_done, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_back1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(IngreNameCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(lbName))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lbPrice))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(lbCate)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_unit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_done, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

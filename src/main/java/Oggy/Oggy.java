@@ -5,7 +5,9 @@
 package Oggy;
 
 import GUIpages.Login;
+import GUIpages.ManageRes;
 import backendHander.DBAppHandler;
+import navigation.controlPanel;
 
 /**
  *
@@ -19,7 +21,9 @@ public class Oggy {
         DBAppHandler authentication = new DBAppHandler();
         System.out.println(authentication.validateUserCrediential("potato-bleh", "kilozin123"));
         System.out.println(authentication.queryMenuItem("food_menu"));
-        Login s = new Login();
+//        Login s = new Login();
+        ManageRes s = new ManageRes();
+
         s.setVisible(true);
     }  
 }

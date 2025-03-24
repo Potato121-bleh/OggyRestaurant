@@ -4,59 +4,141 @@
 // ⚠ ⚠️ Please make sure you have your database ready and named it to be: OggyShop
 
 
-Create table user_auth(user_id Serial primary key, user_name varchar(50), user_password varchar(50), user_balance decimal(10,2));
+-- Create user authentication table
+CREATE TABLE user_auth (
+    user_id SERIAL PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    user_password VARCHAR(50) NOT NULL,
+    user_balance DECIMAL(10,2) DEFAULT 0.00
+);
 
-Create table menu_item(item_id SERIAL PRIMARY KEY, item_name varchar(50), item_price decimal(10,2),item_category varchar(50));
-Create table order_transaction(transaction_id serial primary key, user_id int references user_auth(user_id), 
-item_id int references menu_item(item_id));
+-- Create menu items table
+CREATE TABLE menu_item (
+    item_id SERIAL PRIMARY KEY,
+    item_name VARCHAR(50) NOT NULL,
+    item_price DECIMAL(10,2) NOT NULL,
+    item_category VARCHAR(50) NOT NULL
+);
 
-create table ingredient_db(ingredient_id Serial primary key, name varchar(100), total_unit int)
-create table recipe_db(recipe_id Serial primary key, menu_item_id int references menu_item(item_id), 
-ingredient_id int references ingredient_db(ingredient_id), request_unit int)
-
-
-
--- insert menu_item
+-- Insert menu items
 INSERT INTO menu_item (item_name, item_price, item_category) VALUES
-('Steak', 6.58, 'food'),
-('Sandwich', 7.82, 'food'),
-('Milk Tea', 1.75, 'drink'),
-('Milkshake', 4.80, 'drink'),
-('Taco', 5.25, 'food'),
-('Salad', 4.48, 'food'),
-('Kuy Teav', 6.81, 'food'),
-('Smoothie', 6.05, 'drink'),
-('Coffee', 3.30, 'drink'),
-('Wine', 6.97, 'drink'),
-('Soup', 4.58, 'food'),
-('Amok', 7.62, 'food'),
-('Lok Lak', 3.63, 'food'),
-('Smoothie', 3.17, 'drink'),
-('Tea', 6.00, 'drink'),
-('Bai Sach Chrouk', 6.15, 'food'),
-('Juice', 5.75, 'drink'),
-('Coffee', 5.95, 'drink'),
-('Wine', 6.27, 'drink'),
-('Burger', 3.62, 'food'),
-('Bai Sach Chrouk', 5.08, 'food'),
-('Water', 5.17, 'drink'),
-('Salad', 3.45, 'food'),
-('Tea', 7.87, 'drink'),
-('Pizza', 5.61, 'food'),
-('Soda', 3.40, 'drink'),
-('Ang Dtray-Meuk', 4.92, 'food'),
-('Pizza', 5.67, 'food'),
-('Beer', 7.44, 'drink'),
-('Wine', 7.19, 'drink');
+('Steak', 6.58, 'Food'),
+('Sandwich', 7.82, 'Food'),
+('Milk Tea', 1.75, 'Drink'),
+('Milkshake', 4.80, 'Drink'),
+('Taco', 5.25, 'Food'),
+('Salad', 4.48, 'Food'),
+('Kuy Teav', 6.81, 'Food'),
+('Coffee', 3.30, 'Drink'),
+('Wine', 6.97, 'Drink'),
+('Soup', 4.58, 'Food'),
+('Amok', 7.62, 'Food'),
+('Lok Lak', 3.63, 'Food'),
+('Smoothie', 3.17, 'Drink'),
+('Tea', 6.00, 'Drink'),
+('Bai Sach Chrouk', 6.15, 'Food'),
+('Juice', 5.75, 'Drink'),
+('Wine', 6.27, 'Drink'),
+('Burger', 3.62, 'Food'),
+('Water', 5.17, 'Drink'),
+('Soda', 3.40, 'Drink'),
+('Pizza', 5.67, 'Food'),
+('Beer', 7.44, 'Drink');
 
--- ===========Insert user_auth
-
+-- Insert user authentication data
 INSERT INTO user_auth (user_name, user_password, user_balance) 
 VALUES ('Oggy', '121212', 1000.00);
 
--- ==== Insert order_transaction
-Insert into order_transaction (user_id, item_id) values (1,4)
-Select * From order_transaction
+-- Create restaurant table management
+CREATE TABLE rst_table (
+    table_id SERIAL PRIMARY KEY, 
+    table_name VARCHAR(100) UNIQUE NOT NULL
+);
 
+-- Insert restaurant tables
+INSERT INTO rst_table (table_name) VALUES ('Table 1'), ('Table 2');
 
-Insert into ingredient_db(name, total_unit) values ('melon', 1000),('cream',2000)
+-- Create order transaction table
+CREATE TABLE order_transaction (
+    transaction_id SERIAL PRIMARY KEY,
+    table_id INT REFERENCES rst_table(table_id) ON DELETE CASCADE,
+    item_id INT REFERENCES menu_item(item_id) ON DELETE CASCADE,
+    qty INT NOT NULL CHECK (qty > 0)
+);
+
+-- Create ingredient database table
+CREATE TABLE ingredient_db (
+    ingredient_id SERIAL PRIMARY KEY, 
+    name VARCHAR(100) UNIQUE NOT NULL,
+    total_unit INT NOT NULL CHECK (total_unit >= 0)
+);
+
+-- Create recipe database table
+CREATE TABLE recipe_db (
+    recipe_id SERIAL PRIMARY KEY, 
+    menu_item_id INT REFERENCES menu_item(item_id) ON DELETE CASCADE, 
+    ingredient_id INT REFERENCES ingredient_db(ingredient_id) ON DELETE CASCADE, 
+    request_unit INT NOT NULL CHECK (request_unit > 0)
+);
+
+-- Insert ingredients
+INSERT INTO ingredient_db (name, total_unit) VALUES
+('Lemongrass', 100),
+('Galangal', 100),
+('Kaffir Lime Leaves', 100),
+('Prahok (Fermented Fish)', 100),
+('Coconut Milk', 100),
+('Rice Noodles', 100),
+('Morning Glory', 100),
+('Tamarind Paste', 100),
+('Palm Sugar', 100),
+('Fish Sauce', 100),
+('Chicken', 100),
+('Beef', 100),
+('Fish', 100),
+('Egg', 100),
+('Sugar Cane', 100),
+('Lime', 100),
+('Tea Leaves', 100),
+('Condensed Milk', 100);
+
+-- Insert Khmer dishes and drinks
+INSERT INTO menu_item (item_name, item_price, item_category) VALUES
+('Amok Trey (Fish Amok)', 5.00, 'Food'),
+('Bai Sach Chrouk (Pork and Rice)', 3.50, 'Food'),
+('Nom Banh Chok (Khmer Noodles)', 4.00, 'Food'),
+('Samlor Korko (Khmer Stirred Soup)', 4.50, 'Food'),
+('Teuk Tnaot (Sugar Palm Juice)', 2.00, 'Drink'),
+('Teh Kdam (Iced Lime Tea)', 1.50, 'Drink'),
+('Teh Kdam Tirk Doh Koh (Iced Milk Tea)', 2.50, 'Drink');
+
+-- Insert recipes
+INSERT INTO recipe_db (menu_item_id, ingredient_id, request_unit) VALUES
+-- Amok Trey
+((SELECT item_id FROM menu_item WHERE item_name = 'Amok Trey (Fish Amok)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Fish'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Amok Trey (Fish Amok)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Coconut Milk'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Amok Trey (Fish Amok)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Lemongrass'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Amok Trey (Fish Amok)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Prahok (Fermented Fish)'), 1),
+
+-- Bai Sach Chrouk
+((SELECT item_id FROM menu_item WHERE item_name = 'Bai Sach Chrouk (Pork and Rice)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Rice Noodles'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Bai Sach Chrouk (Pork and Rice)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Palm Sugar'), 1),
+
+-- Nom Banh Chok
+((SELECT item_id FROM menu_item WHERE item_name = 'Nom Banh Chok (Khmer Noodles)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Rice Noodles'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Nom Banh Chok (Khmer Noodles)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Fish Sauce'), 1),
+
+-- Samlor Korko
+((SELECT item_id FROM menu_item WHERE item_name = 'Samlor Korko (Khmer Stirred Soup)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Morning Glory'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Samlor Korko (Khmer Stirred Soup)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Tamarind Paste'), 1),
+
+-- Teuk Tnaot (Sugar Palm Juice)
+((SELECT item_id FROM menu_item WHERE item_name = 'Teuk Tnaot (Sugar Palm Juice)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Palm Sugar'), 1),
+
+-- Teh Kdam (Iced Lime Tea)
+((SELECT item_id FROM menu_item WHERE item_name = 'Teh Kdam (Iced Lime Tea)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Tea Leaves'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Teh Kdam (Iced Lime Tea)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Lime'), 1),
+
+-- Teh Kdam Tirk Doh Koh (Iced Milk Tea)
+((SELECT item_id FROM menu_item WHERE item_name = 'Teh Kdam Tirk Doh Koh (Iced Milk Tea)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Tea Leaves'), 1),
+((SELECT item_id FROM menu_item WHERE item_name = 'Teh Kdam Tirk Doh Koh (Iced Milk Tea)'), (SELECT ingredient_id FROM ingredient_db WHERE name = 'Condensed Milk'), 1);

@@ -4,6 +4,8 @@
  */
 package navigation;
 
+import GUIpages.Login;
+
 /**
  *
  * @author ahpka
@@ -42,13 +44,18 @@ public class controlPanel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel1.setText("Select Objective");
+        jLabel1.setText("Oggy Restaurant");
 
         jButton1.setText("Customer Order");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jButton2.setText("Manage Menu");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel2.setText("This option will allow you to:");
@@ -157,6 +164,13 @@ public class controlPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+//        Login.main(null);
+//        this.dispose();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
