@@ -1,4 +1,4 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -21,8 +21,12 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         GetMenu();
+        StoreItem.ItemName = "";
+        StoreItem.ItemPrice = 0.00;
+        StoreItem.category= "";   
+
     }
-    
+
     private void GetMenu() {
         String[] clms = {"Item_Id", "Item_name", "Item_Price", "Item_Category"};
         DefaultTableModel tablemodel = new DefaultTableModel(clms, 0);
@@ -31,9 +35,9 @@ public class Dashboard extends javax.swing.JFrame {
         List<List<Object>> menuItems = dbhandler.getMenuItem();
         for (List<Object> row : menuItems) {
             tablemodel.addRow(row.toArray());
-        }         
-    }  
-    
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -250,12 +254,12 @@ public class Dashboard extends javax.swing.JFrame {
                 "Confirm Logout?",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
-        if(CfLogout == JOptionPane.YES_OPTION){
-        Login.main(null);
-        this.dispose();
-        
+        if (CfLogout == JOptionPane.YES_OPTION) {
+            Login.main(null);
+            this.dispose();
+
         }
-        
+
 
     }//GEN-LAST:event_btn_logoutActionPerformed
 

@@ -338,10 +338,9 @@ public class AddIngredient extends javax.swing.JFrame {
 //      
 //                JOptionPane.YES_NO_OPTION,
 //                JOptionPane.QUESTION_MESSAGE);
-
         String[] parts = name.split(" - ", 2);
         String onlyName = (parts.length > 1) ? parts[1] : parts[0];
-        
+
         JLabel message = new JLabel("<html>Are you sure you want to add "
                 + onlyName + " with qty " + Unit + "g to menu " + StoreItem.ItemName
                 + "<font color='red'><br>Note: You cannot remove it once you added!</font></html>");
@@ -361,6 +360,9 @@ public class AddIngredient extends javax.swing.JFrame {
                     System.out.println("Error");
                 }
             }
+            String ItemInlist = name + " | Unit: " + qty + "g";
+            listModel.addElement(ItemInlist);
+            txt_unit.setText("");
         }
 
 //        StoreItem.unit = Unit;
@@ -379,11 +381,6 @@ public class AddIngredient extends javax.swing.JFrame {
 //        }
 ////      end get ingredient Id
 //      Here for display data in list when add 
-
-        String ItemInlist = name + " | Unit: " + qty + "g";
-        listModel.addElement(ItemInlist);
-        txt_unit.setText("");
-
 
     }//GEN-LAST:event_btn_addActionPerformed
 //here to check item exist in list or not

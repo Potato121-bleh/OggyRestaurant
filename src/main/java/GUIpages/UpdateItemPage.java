@@ -25,6 +25,7 @@ public class UpdateItemPage extends javax.swing.JFrame {
         ButtonGroup btngp = new ButtonGroup();
         btngp.add(selectedFood);
         btngp.add(selectedDrink);
+
     }
 
     /**
@@ -215,6 +216,7 @@ public class UpdateItemPage extends javax.swing.JFrame {
         Dashboard.main(null);
         this.dispose();
 
+
     }//GEN-LAST:event_btn_backActionPerformed
 
     String getCategory() {
@@ -229,15 +231,15 @@ public class UpdateItemPage extends javax.swing.JFrame {
     }
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-            String itemName = txt_name.getText().trim();
-            String itemPrice = txt_price.getText().trim();
-            String category = getCategory();
-        int CfSaveEdit = JOptionPane.showConfirmDialog(this, "Are you sure you want to update "+ itemName,
+        String itemName = txt_name.getText().trim();
+        String itemPrice = txt_price.getText().trim();
+        String category = getCategory();
+        int CfSaveEdit = JOptionPane.showConfirmDialog(this, "Are you sure you want to update " + itemName,
                 "Confirm Change?",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
         if (CfSaveEdit == JOptionPane.YES_OPTION) {
-            
+
             if (itemName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter the item name.", "Input Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -266,12 +268,18 @@ public class UpdateItemPage extends javax.swing.JFrame {
                 txt_price.setText("");
                 selectedFood.setSelected(false);
                 selectedDrink.setSelected(false);
+                ButtonGroup btngp = new ButtonGroup();
+                btngp.add(selectedFood);
+                btngp.add(selectedDrink);
+                btngp.clearSelection();
+
                 DisplayItemNameComboBox();
             } else {
 
                 JOptionPane.showMessageDialog(this, "Failed to update item", "Update Failed", JOptionPane.ERROR_MESSAGE);
             }
         }
+
     }//GEN-LAST:event_btn_submitActionPerformed
     private void DisplayItemNameComboBox() {
 
